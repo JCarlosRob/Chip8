@@ -1,11 +1,13 @@
 package com.chip8.model.core.buffer;
 
 import com.chip8.api.core.buffer.Buffer;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import javax.annotation.PostConstruct;
 import java.util.stream.IntStream;
 
+@Component
 public class DisplayBuffer implements Buffer {
 
     private final static Integer POSITION_MAX_X = 64;
@@ -41,6 +43,7 @@ public class DisplayBuffer implements Buffer {
         Assert.notNull(y, "The Y position can not be null");
         Assert.isTrue(y >= 0, "The Y position can not be negative");
         Assert.isTrue(y < POSITION_MAX_Y, "The Y position can not be greater than " + POSITION_MAX_Y);
+        Assert.notNull(data, "The data parameter can not be null");
         display[x][y] = data;
     }
 
