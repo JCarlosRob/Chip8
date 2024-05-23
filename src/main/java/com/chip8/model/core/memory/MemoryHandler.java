@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 @Component
-public class MemoryImpl implements Memory {
+public class MemoryHandler implements Memory {
 
-    private final static Integer MEMORY_SIZE = 4095;
+    private final static Integer MEMORY_SIZE = 4094;
 
     private final Byte[] memory = new Byte[MEMORY_SIZE];
 
