@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Arrays;
+
 @ExtendWith(SpringExtension.class)
 @Import(DisplayBuffer.class)
 public class DisplayBufferTest {
@@ -97,28 +99,52 @@ public class DisplayBufferTest {
     }
 
     @Test
-    public void write_inputYCoordinateNegative_returnException(){
+    public void write_inputYCoordinateNegative_returnException_test(){
         Assertions.assertThrows(IllegalArgumentException.class, () -> displayBuffer.write(Short.parseShort("0"), Short.parseShort("-1"), Byte.decode("1")));
     }
 
     @Test
-    public void write_inputAllCoordinatesNegative_returnException(){
+    public void write_inputAllCoordinatesNegative_returnException_test(){
         Assertions.assertThrows(IllegalArgumentException.class, () -> displayBuffer.write(Short.parseShort("-1"), Short.parseShort("-1"), Byte.decode("1")));
     }
 
     @Test
-    public void write_inputXCoordinateGraterThan63_returnException(){
+    public void write_inputXCoordinateGraterThan63_returnException_test(){
         Assertions.assertThrows(IllegalArgumentException.class, () -> displayBuffer.write(Short.parseShort("64"), Short.parseShort("0"), Byte.decode("1")));
     }
 
     @Test
-    public void write_inputYCoordinateGraterThan31_returnException(){
+    public void write_inputYCoordinateGraterThan31_returnException_test(){
         Assertions.assertThrows(IllegalArgumentException.class, () -> displayBuffer.write(Short.parseShort("0"), Short.parseShort("32"), Byte.decode("1")));
     }
 
     @Test
-    public void write_inputXCoordinateGraterThan63AndYCoordinateGraterThan31_returnException(){
+    public void write_inputXCoordinateGraterThan63AndYCoordinateGraterThan31_returnException_test(){
         Assertions.assertThrows(IllegalArgumentException.class, () -> displayBuffer.write(Short.parseShort("64"), Short.parseShort("32"), Byte.decode("1")));
+    }
+
+    @Test
+    public void reset_test(){
+        final Byte[] rowExpected = {0,0,0,0,0,0,0,0,
+                                    0,0,0,0,0,0,0,0,
+                                    0,0,0,0,0,0,0,0,
+                                    0,0,0,0,0,0,0,0,
+                                    0,0,0,0,0,0,0,0,
+                                    0,0,0,0,0,0,0,0,
+                                    0,0,0,0,0,0,0,0,
+                                    0,0,0,0,0,0,0,0};
+        final Byte[][] expected = {rowExpected,rowExpected,rowExpected,rowExpected,
+                                    rowExpected,rowExpected,rowExpected,rowExpected,
+                                    rowExpected,rowExpected,rowExpected,rowExpected,
+                                    rowExpected,rowExpected,rowExpected,rowExpected,
+                                    rowExpected,rowExpected,rowExpected,rowExpected,
+                                    rowExpected,rowExpected,rowExpected,rowExpected,
+                                    rowExpected,rowExpected,rowExpected,rowExpected,
+                                    rowExpected,rowExpected,rowExpected,rowExpected};
+        displayBuffer.write(Short.parseShort("1"), Short.parseShort("1"), Byte.decode("1"));
+        displayBuffer.reset();
+        final Byte[][] result = displayBuffer.get();
+        Assertions.assertTrue(Arrays.deepEquals(expected, result));
     }
 
 }
