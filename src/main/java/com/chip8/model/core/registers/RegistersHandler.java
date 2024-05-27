@@ -1,41 +1,41 @@
 package com.chip8.model.core.registers;
 
 import com.chip8.api.core.registers.Registers;
-import lombok.Data;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 @Component
-@Data
 public class RegistersHandler implements Registers {
 
-    private Byte[] v = new Byte[16];
+    private static final Integer MAX_LENGTH_V_REGISTER = 16;
+
+    private final Byte[] v = new Byte[MAX_LENGTH_V_REGISTER];
 
     private Short vI;
 
     @Override
-    public void setVRegister(Integer position, Byte data) {
+    public void setVRegister(final Integer position, final Byte data) {
         Assert.notNull(position, "The position can not be null");
         Assert.isTrue(position >= 0, "The position can not be negative");
-        Assert.isTrue(position < v.length, "The position can not be greater than " + (v.length - 1));
-        v[position] = data;
+        Assert.isTrue(position < this.v.length, "The position can not be greater than " + (this.v.length - 1));
+        this.v[position] = data;
     }
 
     @Override
-    public Byte getVRegister(Integer position) {
+    public Byte getVRegister(final Integer position) {
         Assert.notNull(position, "The position can not be null");
         Assert.isTrue(position >= 0, "The position can not be negative");
-        Assert.isTrue(position < v.length, "The position can not be greater than " + (v.length - 1));
-        return v[position];
+        Assert.isTrue(position < this.v.length, "The position can not be greater than " + (this.v.length - 1));
+        return this.v[position];
     }
 
     @Override
-    public void setIRegister(Short data) {
-        vI = data;
+    public void setIRegister(final Short data) {
+        this.vI = data;
     }
 
     @Override
     public Short getIRegister() {
-        return vI;
+        return this.vI;
     }
 }
