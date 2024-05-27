@@ -40,7 +40,7 @@ class ClearDisplayInstructionTest {
 
     @Test
     void run_test() {
-        this.clearDisplayInstruction.run();
+        this.clearDisplayInstruction.run(null);
         Mockito.verify(this.displayBuffer, Mockito.times(1)).reset();
         Mockito.verifyNoMoreInteractions(this.displayBuffer);
     }

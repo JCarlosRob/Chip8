@@ -4,6 +4,6 @@ public interface Instruction {
 
     Boolean isExecutable(final String data);
 
-    void run();
+    void run(final String data);
 
 }

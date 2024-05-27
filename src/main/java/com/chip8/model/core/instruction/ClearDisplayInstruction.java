@@ -27,7 +27,7 @@ public class ClearDisplayInstruction implements Instruction {
     }
 
     @Override
-    public void run() {
+    public void run(final String data) {
         this.displayBuffer.reset();
     }
 }
