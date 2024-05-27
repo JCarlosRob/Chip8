@@ -13,7 +13,7 @@ public class SysCallInstruction implements Instruction {
     private static final Integer COMMAND = HexFormat.fromHexDigits("0");
 
     @Override
-    public Boolean isExecutable(String data) {
+    public Boolean isExecutable(final String data) {
         Assert.notNull(data, "Data can not be null");
         Assert.hasLength(data, "Data can not empty");
         return Objects.equals(COMMAND, HexFormat.fromHexDigits(data.substring(1)));

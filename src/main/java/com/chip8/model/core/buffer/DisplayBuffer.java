@@ -10,14 +10,14 @@ import java.util.stream.IntStream;
 @Component
 public class DisplayBuffer implements Buffer {
 
-    private final static Integer POSITION_MAX_X = 64;
-    private final static Integer POSITION_MAX_Y = 32;
+    private static final Integer POSITION_MAX_X = 64;
+    private static final Integer POSITION_MAX_Y = 32;
 
     private Byte[][] display;
 
     @PostConstruct
     private void init() {
-        display = IntStream.range(0, POSITION_MAX_Y)
+        this.display = IntStream.range(0, POSITION_MAX_Y)
                 .mapToObj(r -> IntStream.range(0, POSITION_MAX_X)
                         .mapToObj(c -> (byte) 0)
                         .toArray(Byte[]::new))
@@ -32,11 +32,11 @@ public class DisplayBuffer implements Buffer {
         Assert.notNull(y, "The Y position can not be null");
         Assert.isTrue(y >= 0, "The Y position can not be negative");
         Assert.isTrue(y < POSITION_MAX_Y, "The Y position can not be greater than " + POSITION_MAX_Y);
-        return display[x][y];
+        return this.display[x][y];
     }
 
     @Override
-    public void write(final Short x, Short y, final Byte data) {
+    public void write(final Short x, final Short y, final Byte data) {
         Assert.notNull(x, "The X position can not be null");
         Assert.isTrue(x >= 0, "The X position can not be negative");
         Assert.isTrue(x < POSITION_MAX_X, "The X position can not be greater than " + POSITION_MAX_X);
@@ -44,16 +44,16 @@ public class DisplayBuffer implements Buffer {
         Assert.isTrue(y >= 0, "The Y position can not be negative");
         Assert.isTrue(y < POSITION_MAX_Y, "The Y position can not be greater than " + POSITION_MAX_Y);
         Assert.notNull(data, "The data parameter can not be null");
-        display[x][y] = data;
+        this.display[x][y] = data;
     }
 
     @Override
     public Byte[][] get() {
-        return display;
+        return this.display;
     }
 
     @Override
     public void reset() {
-        init();
+        this.init();
     }
 }

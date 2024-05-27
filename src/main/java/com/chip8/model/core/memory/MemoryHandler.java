@@ -7,7 +7,7 @@ import org.springframework.util.Assert;
 @Component
 public class MemoryHandler implements Memory {
 
-    private final static Integer MEMORY_SIZE = 4094;
+    private static final Integer MEMORY_SIZE = 4094;
 
     private final Byte[] memory = new Byte[MEMORY_SIZE];
 

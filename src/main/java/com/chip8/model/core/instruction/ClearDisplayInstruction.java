@@ -13,8 +13,12 @@ public class ClearDisplayInstruction implements Instruction {
 
     private static final Integer COMMAND = HexFormat.fromHexDigits("00E0");
 
+    private final Buffer displayBuffer;
+
     @Autowired
-    private Buffer displayBuffer;
+    public ClearDisplayInstruction(final Buffer displayBuffer) {
+        this.displayBuffer = displayBuffer;
+    }
 
     @Override
     public Boolean isExecutable(final String data) {
@@ -23,6 +27,6 @@ public class ClearDisplayInstruction implements Instruction {
 
     @Override
     public void run() {
-        displayBuffer.reset();
+        this.displayBuffer.reset();
     }
 }
