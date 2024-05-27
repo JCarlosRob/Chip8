@@ -4,6 +4,7 @@ import com.chip8.api.core.buffer.Buffer;
 import com.chip8.api.core.instruction.Instruction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.HexFormat;
 import java.util.Objects;
@@ -22,7 +23,7 @@ public class ClearDisplayInstruction implements Instruction {
 
     @Override
     public Boolean isExecutable(final String data) {
-        return Objects.equals(COMMAND, HexFormat.fromHexDigits(data));
+        return StringUtils.hasLength(data) && Objects.equals(COMMAND, HexFormat.fromHexDigits(data));
     }
 
     @Override
