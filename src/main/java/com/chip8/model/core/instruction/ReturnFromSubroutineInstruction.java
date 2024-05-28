@@ -1,8 +1,8 @@
 package com.chip8.model.core.instruction;
 
 import com.chip8.api.core.instruction.Instruction;
-import com.chip8.model.core.registers.ProgramCounter;
-import com.chip8.model.core.registers.StackPointer;
+import com.chip8.model.core.register.ProgramCounterHandler;
+import com.chip8.model.core.register.StackPointerHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -15,12 +15,12 @@ public class ReturnFromSubroutineInstruction implements Instruction {
 
     private static final Integer COMMAND = HexFormat.fromHexDigits("00EE");
 
-    private final ProgramCounter pc;
+    private final ProgramCounterHandler pc;
 
-    private final StackPointer sp;
+    private final StackPointerHandler sp;
 
     @Autowired
-    public ReturnFromSubroutineInstruction(final ProgramCounter pc, final StackPointer sp) {
+    public ReturnFromSubroutineInstruction(final ProgramCounterHandler pc, final StackPointerHandler sp) {
         this.pc = pc;
         this.sp = sp;
     }

@@ -3,9 +3,9 @@ package com.chip8.model.core.memory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class MemoryHandlerTest {
+class MemoryRamHandlerTest {
 
-    private final MemoryHandler memoryHandler = new MemoryHandler();
+    private final MemoryRamHandler memoryHandler = new MemoryRamHandler();
 
     @Test
     void read_inputMinPosition_test() {

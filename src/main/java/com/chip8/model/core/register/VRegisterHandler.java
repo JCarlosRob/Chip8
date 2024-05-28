@@ -1,15 +1,17 @@
-package com.chip8.model.core.registers;
+package com.chip8.model.core.register;
 
+import com.chip8.api.core.register.VRegister;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 @Component
-public class VRegister {
+public class VRegisterHandler implements VRegister {
 
     private static final Integer MAX_LENGTH_V_REGISTER = 16;
 
     private final Byte[] v = new Byte[MAX_LENGTH_V_REGISTER];
 
+    @Override
     public void setVRegister(final Integer position, final Byte data) {
         Assert.notNull(position, "The position can not be null");
         Assert.isTrue(position >= 0, "The position can not be negative");
@@ -17,6 +19,7 @@ public class VRegister {
         this.v[position] = data;
     }
 
+    @Override
     public Byte getVRegister(final Integer position) {
         Assert.notNull(position, "The position can not be null");
         Assert.isTrue(position >= 0, "The position can not be negative");

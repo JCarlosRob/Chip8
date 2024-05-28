@@ -1,7 +1,7 @@
 package com.chip8.model.core.instruction;
 
-import com.chip8.model.core.registers.ProgramCounter;
-import com.chip8.model.core.registers.StackPointer;
+import com.chip8.model.core.register.ProgramCounterHandler;
+import com.chip8.model.core.register.StackPointerHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,10 +14,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class ReturnFromSubroutineInstructionTest {
 
     @Mock
-    private StackPointer sp;
+    private StackPointerHandler sp;
 
     @Mock
-    private ProgramCounter pc;
+    private ProgramCounterHandler pc;
 
     @InjectMocks
     private ReturnFromSubroutineInstruction returnFromSubroutineInstruction;

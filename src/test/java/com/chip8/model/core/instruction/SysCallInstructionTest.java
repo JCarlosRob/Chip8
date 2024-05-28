@@ -1,6 +1,6 @@
 package com.chip8.model.core.instruction;
 
-import com.chip8.model.core.registers.ProgramCounter;
+import com.chip8.model.core.register.ProgramCounterHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +15,7 @@ import java.util.HexFormat;
 class SysCallInstructionTest {
 
     @Mock
-    private ProgramCounter pc;
+    private ProgramCounterHandler pc;
 
     @InjectMocks
     private SysCallInstruction sysCallInstruction;

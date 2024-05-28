@@ -1,11 +1,11 @@
 package com.chip8.model.core.memory;
 
-import com.chip8.api.core.memory.Memory;
+import com.chip8.api.core.memory.MemoryRam;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 @Component
-public class MemoryHandler implements Memory {
+public class MemoryRamHandler implements MemoryRam {
 
     private static final Integer MEMORY_SIZE = 4094;
 

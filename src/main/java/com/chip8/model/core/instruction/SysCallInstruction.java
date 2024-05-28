@@ -1,7 +1,7 @@
 package com.chip8.model.core.instruction;
 
 import com.chip8.api.core.instruction.Instruction;
-import com.chip8.model.core.registers.ProgramCounter;
+import com.chip8.model.core.register.ProgramCounterHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
@@ -13,9 +13,9 @@ public class SysCallInstruction implements Instruction {
 
     private static final Integer COMMAND = HexFormat.fromHexDigits("0");
 
-    private final ProgramCounter pc;
+    private final ProgramCounterHandler pc;
 
-    public SysCallInstruction(final ProgramCounter pc) {
+    public SysCallInstruction(final ProgramCounterHandler pc) {
         this.pc = pc;
     }
 
