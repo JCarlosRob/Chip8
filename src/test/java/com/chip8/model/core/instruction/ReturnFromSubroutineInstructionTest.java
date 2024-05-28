@@ -1,5 +1,6 @@
 package com.chip8.model.core.instruction;
 
+import com.chip8.api.core.memory.Memory;
 import com.chip8.model.core.register.ProgramCounterHandler;
 import com.chip8.model.core.register.StackPointerHandler;
 import org.junit.jupiter.api.Assertions;
@@ -18,6 +19,9 @@ class ReturnFromSubroutineInstructionTest {
 
     @Mock
     private ProgramCounterHandler pc;
+
+    @Mock
+    private Memory memoryStack;
 
     @InjectMocks
     private ReturnFromSubroutineInstruction returnFromSubroutineInstruction;
@@ -45,8 +49,9 @@ class ReturnFromSubroutineInstructionTest {
     @Test
     void run_test() {
         Mockito.when(this.sp.getSp()).thenReturn((short) 1);
+        Mockito.when(this.memoryStack.read(1)).thenReturn((byte) 2);
         this.returnFromSubroutineInstruction.run("00EE");
-        Mockito.verify(this.pc, Mockito.times(1)).setPc((short) 1);
+        Mockito.verify(this.pc, Mockito.times(1)).setPc((short) 2);
         Mockito.verify(this.sp, Mockito.times(1)).decrement();
     }
 

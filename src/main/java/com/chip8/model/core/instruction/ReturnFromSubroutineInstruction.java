@@ -1,6 +1,7 @@
 package com.chip8.model.core.instruction;
 
 import com.chip8.api.core.instruction.Instruction;
+import com.chip8.api.core.memory.Memory;
 import com.chip8.model.core.register.ProgramCounterHandler;
 import com.chip8.model.core.register.StackPointerHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,13 @@ public class ReturnFromSubroutineInstruction implements Instruction {
 
     private final StackPointerHandler sp;
 
+    private final Memory memoryStack;
+
     @Autowired
-    public ReturnFromSubroutineInstruction(final ProgramCounterHandler pc, final StackPointerHandler sp) {
+    public ReturnFromSubroutineInstruction(final ProgramCounterHandler pc, final StackPointerHandler sp, final Memory memoryStack) {
         this.pc = pc;
         this.sp = sp;
+        this.memoryStack = memoryStack;
     }
 
     @Override
@@ -37,6 +41,6 @@ public class ReturnFromSubroutineInstruction implements Instruction {
         Assert.notNull(data, "Data can not be null");
         Assert.hasLength(data, "Data can not empty");
         this.sp.decrement();
-        this.pc.setPc(this.sp.getSp());
+        this.pc.setPc((short) this.memoryStack.read(this.sp.getSp().intValue()));
     }
 }
