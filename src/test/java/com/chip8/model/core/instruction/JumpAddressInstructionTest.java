@@ -53,7 +53,7 @@ class JumpAddressInstructionTest {
     @Test
     void run_test() {
         this.jumpAddressInstruction.run("1FFF");
-        Mockito.verify(this.pc, Mockito.times(1)).setPc((short) HexFormat.fromHexDigits("FFF"));
+        Mockito.verify(this.pc, Mockito.times(1)).setPc(HexFormat.fromHexDigits("FFF"));
     }
 
 }

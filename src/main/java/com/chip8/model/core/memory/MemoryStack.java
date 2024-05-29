@@ -7,10 +7,10 @@ public class MemoryStack implements Memory {
 
     private static final Integer MEMORY_SIZE = 20;
 
-    private final Byte[] memory = new Byte[MEMORY_SIZE];
+    private final Integer[] memory = new Integer[MEMORY_SIZE];
 
     @Override
-    public void write(final Integer position, final Byte data) {
+    public void write(final Integer position, final Integer data) {
         Assert.notNull(position, "The position can not be null");
         Assert.notNull(data, "The data can not be null");
         Assert.isTrue(position >= 0, "The position can not be negative");
@@ -19,7 +19,7 @@ public class MemoryStack implements Memory {
     }
 
     @Override
-    public Byte read(final Integer position) {
+    public Integer read(final Integer position) {
         Assert.notNull(position, "The position can not be null");
         Assert.isTrue(position >= 0, "The position can not be negative");
         Assert.isTrue(position < MEMORY_SIZE, "The position can not greater than " + MEMORY_SIZE);

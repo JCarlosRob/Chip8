@@ -9,8 +9,8 @@ class IRegisterHandlerTest {
 
     @Test
     void getViRegister_test() {
-        this.viRegisterHandler.setVI(Short.parseShort("1"));
-        Assertions.assertEquals(Short.parseShort("1"), this.viRegisterHandler.getVI());
+        this.viRegisterHandler.setVI(1);
+        Assertions.assertEquals(1, this.viRegisterHandler.getVI());
     }
 
 }

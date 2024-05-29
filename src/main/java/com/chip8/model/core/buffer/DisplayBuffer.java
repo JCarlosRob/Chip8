@@ -13,19 +13,19 @@ public class DisplayBuffer implements Buffer {
     private static final Integer POSITION_MAX_X = 64;
     private static final Integer POSITION_MAX_Y = 32;
 
-    private Byte[][] display;
+    private Integer[][] display;
 
     @PostConstruct
     private void init() {
         this.display = IntStream.range(0, POSITION_MAX_Y)
                 .mapToObj(r -> IntStream.range(0, POSITION_MAX_X)
-                        .mapToObj(c -> (byte) 0)
-                        .toArray(Byte[]::new))
-                .toArray(Byte[][]::new);
+                        .mapToObj(c -> 0)
+                        .toArray(Integer[]::new))
+                .toArray(Integer[][]::new);
     }
 
     @Override
-    public Byte read(final Short x, final Short y) {
+    public Integer read(final Integer x, final Integer y) {
         Assert.notNull(x, "The X position can not be null");
         Assert.isTrue(x >= 0, "The X position can not be negative");
         Assert.isTrue(x < POSITION_MAX_X, "The X position can not be greater than " + POSITION_MAX_X);
@@ -36,7 +36,7 @@ public class DisplayBuffer implements Buffer {
     }
 
     @Override
-    public void write(final Short x, final Short y, final Byte data) {
+    public void write(final Integer x, final Integer y, final Integer data) {
         Assert.notNull(x, "The X position can not be null");
         Assert.isTrue(x >= 0, "The X position can not be negative");
         Assert.isTrue(x < POSITION_MAX_X, "The X position can not be greater than " + POSITION_MAX_X);
@@ -48,7 +48,7 @@ public class DisplayBuffer implements Buffer {
     }
 
     @Override
-    public Byte[][] get() {
+    public Integer[][] get() {
         return this.display;
     }
 

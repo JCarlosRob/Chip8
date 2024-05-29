@@ -9,16 +9,16 @@ class MemoryRamTest {
 
     @Test
     void read_inputMinPosition_test() {
-        this.memoryRam.write(0, Byte.valueOf("2"));
-        final Byte result = this.memoryRam.read(0);
-        Assertions.assertEquals(Byte.valueOf("2"), result);
+        this.memoryRam.write(0, 2);
+        final Integer result = this.memoryRam.read(0);
+        Assertions.assertEquals(2, result);
     }
 
     @Test
     void read_inputMaxPosition_test() {
-        this.memoryRam.write(4093, Byte.valueOf("2"));
-        final Byte result = this.memoryRam.read(4093);
-        Assertions.assertEquals(Byte.valueOf("2"), result);
+        this.memoryRam.write(4093, 2);
+        final Integer result = this.memoryRam.read(4093);
+        Assertions.assertEquals(2, result);
     }
 
     @Test
@@ -38,17 +38,17 @@ class MemoryRamTest {
 
     @Test
     void write_inputPositionNull_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.write(null, Byte.valueOf("1")));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.write(null, 1));
     }
 
     @Test
     void write_inputPositionGreaterThan4093_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.write(4094, Byte.valueOf("1")));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.write(4094, 1));
     }
 
     @Test
     void write_inputNegativePosition_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.write(-1, Byte.valueOf("1")));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.write(-1, 1));
     }
 
     @Test

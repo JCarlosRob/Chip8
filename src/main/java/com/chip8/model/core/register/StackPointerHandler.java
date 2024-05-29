@@ -12,19 +12,19 @@ import java.util.Objects;
 @Setter
 public class StackPointerHandler implements StackPointer {
 
-    private Short sp;
+    private Integer sp;
 
     @Override
     public void decrement() {
         if (Objects.nonNull(this.sp) && this.sp > 0) {
-            this.sp = (short) (this.sp - 1);
+            this.sp = this.sp - 1;
         }
     }
 
     @Override
     public void increase() {
         if (Objects.nonNull(this.sp) && this.sp < 11) {
-            this.sp = (short) (this.sp + 1);
+            this.sp = this.sp + 1;
         }
     }
 

@@ -9,10 +9,10 @@ import org.springframework.util.Assert;
 @Getter
 public class ProgramCounterHandler implements ProgramCounter {
 
-    private Short pc;
+    private Integer pc = 0;
 
     @Override
-    public void setPc(final Short address) {
+    public void setPc(final Integer address) {
         Assert.notNull(address, "The address can be null.");
         Assert.isTrue(address > -1, "The address can not be negative");
         Assert.isTrue(address < 4096, "The address can not be greater than 4095");
@@ -21,7 +21,13 @@ public class ProgramCounterHandler implements ProgramCounter {
 
     @Override
     public void next() {
-        this.pc = (short) (this.pc + 200);
+        this.pc = this.pc + 1;
+    }
+
+    @Override
+    public void next(final Integer times) {
+        Assert.notNull(times, "Times can not be null");
+        this.pc = this.pc + times;
     }
 
 }

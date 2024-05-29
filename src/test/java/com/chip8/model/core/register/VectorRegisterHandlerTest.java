@@ -15,8 +15,8 @@ class VectorRegisterHandlerTest {
 
     @Test
     void getVRegister_test() {
-        this.vRegisterHandler.setVRegister(0, Byte.valueOf("1"));
-        Assertions.assertEquals(Byte.valueOf("1"), this.vRegisterHandler.getVRegister(0));
+        this.vRegisterHandler.setVRegister(0, 1);
+        Assertions.assertEquals(1, this.vRegisterHandler.getVRegister(0));
     }
 
     @Test
@@ -31,12 +31,12 @@ class VectorRegisterHandlerTest {
 
     @Test
     void setVRegister_inputNegativePosition_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.vRegisterHandler.setVRegister(-1, Byte.valueOf("1")));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.vRegisterHandler.setVRegister(-1, 1));
     }
 
     @Test
     void setVRegister_inputGreaterThan15_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.vRegisterHandler.setVRegister(16, Byte.valueOf("1")));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.vRegisterHandler.setVRegister(16, 1));
     }
 
 }

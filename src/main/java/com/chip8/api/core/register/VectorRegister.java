@@ -2,8 +2,8 @@ package com.chip8.api.core.register;
 
 public interface VectorRegister {
 
-    void setVRegister(Integer position, Byte data);
+    void setVRegister(Integer position, Integer data);
 
-    Byte getVRegister(Integer position);
+    Integer getVRegister(Integer position);
 
 }

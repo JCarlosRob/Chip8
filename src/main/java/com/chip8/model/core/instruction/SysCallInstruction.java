@@ -30,6 +30,6 @@ public class SysCallInstruction implements Instruction {
     public void run(final String data) {
         Assert.notNull(data, "Data can not be null");
         Assert.hasLength(data, "Data can not empty");
-        this.pc.setPc((short) HexFormat.fromHexDigits(data.substring(1)));
+        this.pc.setPc(HexFormat.fromHexDigits(data.substring(1)));
     }
 }

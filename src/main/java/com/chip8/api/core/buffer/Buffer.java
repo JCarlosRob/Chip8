@@ -2,11 +2,11 @@ package com.chip8.api.core.buffer;
 
 public interface Buffer {
 
-    Byte read(Short x, Short y);
+    Integer read(Integer x, Integer y);
 
-    void write(Short x, Short y, Byte data);
+    void write(Integer x, Integer y, Integer data);
 
-    Byte[][] get();
+    Integer[][] get();
 
     void reset();
 

@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component;
 @Setter
 public class IRegisterHandler implements IRegister {
 
-    private Short vI;
+    private Integer vI;
 
 }

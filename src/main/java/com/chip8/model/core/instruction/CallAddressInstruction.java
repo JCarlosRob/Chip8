@@ -41,7 +41,7 @@ public class CallAddressInstruction implements Instruction {
         Assert.notNull(data, "Data can not be null");
         Assert.hasLength(data, "Data can not empty");
         this.sp.increase();
-        this.memoryStack.write(this.sp.getSp().intValue(), this.pc.getPc().byteValue());
-        this.pc.setPc((short) HexFormat.fromHexDigits(data.substring(1)));
+        this.memoryStack.write(this.sp.getSp().intValue(), this.pc.getPc());
+        this.pc.setPc(HexFormat.fromHexDigits(data.substring(1)));
     }
 }
