@@ -1,6 +1,6 @@
 package com.chip8.api.core.register;
 
-public interface ViRegister {
+public interface IRegister {
 
     void setVI(Short data);
 

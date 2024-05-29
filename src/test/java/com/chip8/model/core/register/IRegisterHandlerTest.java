@@ -3,9 +3,9 @@ package com.chip8.model.core.register;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class ViRegisterHandlerTest {
+class IRegisterHandlerTest {
 
-    private final ViRegisterHandler viRegisterHandler = new ViRegisterHandler();
+    private final IRegisterHandler viRegisterHandler = new IRegisterHandler();
 
     @Test
     void getViRegister_test() {
