@@ -13,7 +13,7 @@ import java.util.Objects;
 @Component
 public class SkipNextIsNotEqualsInstruction implements Instruction {
 
-    private static final Integer COMMAND = HexFormat.fromHexDigits("3");
+    private static final Integer COMMAND = HexFormat.fromHexDigits("4");
 
     private final ProgramCounterHandler pc;
 

@@ -41,7 +41,7 @@ class SkipNextIsNotEqualsInstructionTest {
 
     @Test
     void isExecutable_inputCommand_returnTrue_test() {
-        Assertions.assertTrue(this.skipNextIsNotEqualsInstruction.isExecutable("3FFF"));
+        Assertions.assertTrue(this.skipNextIsNotEqualsInstruction.isExecutable("4FFF"));
     }
 
     @Test
@@ -58,7 +58,7 @@ class SkipNextIsNotEqualsInstructionTest {
     void run_vxIsEqualsToData_invokeNext_test() {
         Mockito.when(this.vectorXRegister.getVRegister(HexFormat.fromHexDigits("A"))).thenReturn(254);
 
-        this.skipNextIsNotEqualsInstruction.run("3AFF");
+        this.skipNextIsNotEqualsInstruction.run("4AFF");
 
         Mockito.verify(this.pc, Mockito.times(1)).next(2);
     }
@@ -67,7 +67,7 @@ class SkipNextIsNotEqualsInstructionTest {
     void run_vxIsNotEqualsToData_invokeNext_test() {
         Mockito.when(this.vectorXRegister.getVRegister(HexFormat.fromHexDigits("A"))).thenReturn(255);
 
-        this.skipNextIsNotEqualsInstruction.run("3AFF");
+        this.skipNextIsNotEqualsInstruction.run("4AFF");
 
         Mockito.verifyNoInteractions(this.pc);
     }
