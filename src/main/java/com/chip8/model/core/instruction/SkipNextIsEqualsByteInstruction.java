@@ -11,7 +11,7 @@ import java.util.HexFormat;
 import java.util.Objects;
 
 @Component
-public class SkipNextIsEqualsInstruction implements Instruction {
+public class SkipNextIsEqualsByteInstruction implements Instruction {
 
     private static final Integer COMMAND = HexFormat.fromHexDigits("3");
 
@@ -20,7 +20,7 @@ public class SkipNextIsEqualsInstruction implements Instruction {
     private final VectorRegister vectorXRegister;
 
     @Autowired
-    public SkipNextIsEqualsInstruction(final ProgramCounterHandler pc, final VectorRegister vectorXRegister) {
+    public SkipNextIsEqualsByteInstruction(final ProgramCounterHandler pc, final VectorRegister vectorXRegister) {
         this.pc = pc;
         this.vectorXRegister = vectorXRegister;
     }

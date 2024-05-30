@@ -13,7 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.HexFormat;
 
 @ExtendWith(MockitoExtension.class)
-class SkipNextIsEqualsInstructionTest {
+class SkipNextIsNotEqualsByteInstructionTest {
 
     @Mock
     private ProgramCounterHandler pc;
@@ -22,52 +22,52 @@ class SkipNextIsEqualsInstructionTest {
     private VectorRegister vectorXRegister;
 
     @InjectMocks
-    private SkipNextIsEqualsInstruction skipNextIsEqualsInstruction;
+    private SkipNextIsNotEqualsByteInstruction skipNextIsNotEqualsByteInstruction;
 
     @Test
     void isExecutable_inputNull_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.skipNextIsEqualsInstruction.isExecutable(null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.skipNextIsNotEqualsByteInstruction.isExecutable(null));
     }
 
     @Test
     void isExecutable_inputEmpty_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.skipNextIsEqualsInstruction.isExecutable(""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.skipNextIsNotEqualsByteInstruction.isExecutable(""));
     }
 
     @Test
     void isExecutable_inputCommand_returnFalse_test() {
-        Assertions.assertFalse(this.skipNextIsEqualsInstruction.isExecutable("0000"));
+        Assertions.assertFalse(this.skipNextIsNotEqualsByteInstruction.isExecutable("0000"));
     }
 
     @Test
     void isExecutable_inputCommand_returnTrue_test() {
-        Assertions.assertTrue(this.skipNextIsEqualsInstruction.isExecutable("3FFF"));
+        Assertions.assertTrue(this.skipNextIsNotEqualsByteInstruction.isExecutable("4FFF"));
     }
 
     @Test
     void run_inputNull_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.skipNextIsEqualsInstruction.run(null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.skipNextIsNotEqualsByteInstruction.run(null));
     }
 
     @Test
     void run_inputEmpty_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.skipNextIsEqualsInstruction.run(""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.skipNextIsNotEqualsByteInstruction.run(""));
     }
 
     @Test
     void run_vxIsEqualsToData_invokeNext_test() {
-        Mockito.when(this.vectorXRegister.getVRegister(HexFormat.fromHexDigits("A"))).thenReturn(255);
+        Mockito.when(this.vectorXRegister.getVRegister(HexFormat.fromHexDigits("A"))).thenReturn(254);
 
-        this.skipNextIsEqualsInstruction.run("3AFF");
+        this.skipNextIsNotEqualsByteInstruction.run("4AFF");
 
         Mockito.verify(this.pc, Mockito.times(1)).next(2);
     }
 
     @Test
     void run_vxIsNotEqualsToData_invokeNext_test() {
-        Mockito.when(this.vectorXRegister.getVRegister(HexFormat.fromHexDigits("A"))).thenReturn(254);
+        Mockito.when(this.vectorXRegister.getVRegister(HexFormat.fromHexDigits("A"))).thenReturn(255);
 
-        this.skipNextIsEqualsInstruction.run("3AFF");
+        this.skipNextIsNotEqualsByteInstruction.run("4AFF");
 
         Mockito.verifyNoInteractions(this.pc);
     }

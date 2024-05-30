@@ -11,18 +11,22 @@ import java.util.HexFormat;
 import java.util.Objects;
 
 @Component
-public class SkipNextIsNotEqualsInstruction implements Instruction {
+public class SkipNextIsEqualsVectorInstruction implements Instruction {
 
-    private static final Integer COMMAND = HexFormat.fromHexDigits("4");
+    private static final Integer COMMAND = HexFormat.fromHexDigits("5");
 
     private final ProgramCounterHandler pc;
 
     private final VectorRegister vectorXRegister;
 
+    private final VectorRegister vectorYRegister;
+
     @Autowired
-    public SkipNextIsNotEqualsInstruction(final ProgramCounterHandler pc, final VectorRegister vectorXRegister) {
+    public SkipNextIsEqualsVectorInstruction(final ProgramCounterHandler pc, final VectorRegister vectorXRegister,
+                                             final VectorRegister vectorYRegister) {
         this.pc = pc;
         this.vectorXRegister = vectorXRegister;
+        this.vectorYRegister = vectorYRegister;
     }
 
     @Override
@@ -38,9 +42,9 @@ public class SkipNextIsNotEqualsInstruction implements Instruction {
         Assert.hasLength(data, "Data can not empty");
 
         final Integer vx = HexFormat.fromHexDigits(data.substring(1, 2));
-        final Integer kk = HexFormat.fromHexDigits(data.substring(2));
+        final Integer vy = HexFormat.fromHexDigits(data.substring(2, 3));
 
-        if (!Objects.equals(this.vectorXRegister.getVRegister(vx), kk)) {
+        if (Objects.equals(this.vectorXRegister.getVRegister(vx), this.vectorYRegister.getVRegister(vy))) {
             this.pc.next(2);
         }
     }
