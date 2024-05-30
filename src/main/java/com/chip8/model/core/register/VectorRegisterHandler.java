@@ -25,4 +25,9 @@ public class VectorRegisterHandler implements VectorRegister {
         return this.v[position];
     }
 
+    @Override
+    public void add(final Integer position, final Integer data) {
+        this.v[position] = this.v[position] + data;
+    }
+
 }

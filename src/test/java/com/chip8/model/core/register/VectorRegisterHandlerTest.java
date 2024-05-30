@@ -39,4 +39,12 @@ class VectorRegisterHandlerTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> this.vRegisterHandler.setVRegister(16, 1));
     }
 
+    @Test
+    void add_test() {
+        this.vRegisterHandler.setVRegister(0, 3);
+        this.vRegisterHandler.add(0, 1);
+        final Integer result = this.vRegisterHandler.getVRegister(0);
+        Assertions.assertEquals(4, result);
+    }
+
 }

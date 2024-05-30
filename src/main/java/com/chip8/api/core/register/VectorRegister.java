@@ -6,4 +6,6 @@ public interface VectorRegister {
 
     Integer getVRegister(Integer position);
 
+    void add(Integer position, Integer data);
+
 }
