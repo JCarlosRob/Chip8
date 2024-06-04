@@ -1,20 +1,15 @@
 package com.chip8.model.core.instruction;
 
-import com.chip8.api.core.instruction.Instruction;
 import com.chip8.api.core.memory.Memory;
 import com.chip8.model.core.register.ProgramCounterHandler;
 import com.chip8.model.core.register.StackPointerHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
-
-import java.util.HexFormat;
-import java.util.Objects;
 
 @Component
-public class ReturnFromSubroutineInstruction implements Instruction {
+public class ReturnFromSubroutineInstruction extends InstructionAbstract {
 
-    private static final Integer COMMAND = HexFormat.fromHexDigits("00EE");
+    private static final String COMMAND_REGEX = "00EE";
 
     private final ProgramCounterHandler pc;
 
@@ -24,23 +19,15 @@ public class ReturnFromSubroutineInstruction implements Instruction {
 
     @Autowired
     public ReturnFromSubroutineInstruction(final ProgramCounterHandler pc, final StackPointerHandler sp, final Memory memoryStack) {
+        super(COMMAND_REGEX);
         this.pc = pc;
         this.sp = sp;
         this.memoryStack = memoryStack;
     }
 
     @Override
-    public Boolean isExecutable(final String data) {
-        Assert.notNull(data, "Data can not be null");
-        Assert.hasLength(data, "Data can not empty");
-        return Objects.equals(COMMAND, HexFormat.fromHexDigits(data));
-    }
-
-    @Override
-    public void run(final String data) {
-        Assert.notNull(data, "Data can not be null");
-        Assert.hasLength(data, "Data can not empty");
+    public void execute(final String data) {
         this.sp.decrement();
-        this.pc.setPc(this.memoryStack.read(Integer.valueOf(this.sp.getSp())));
+        this.pc.setPc(this.memoryStack.read(this.sp.getSp()));
     }
 }

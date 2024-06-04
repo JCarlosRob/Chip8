@@ -20,12 +20,12 @@ class ClearDisplayInstructionTest {
 
     @Test
     void isExecutable_inputNull_returnFalse_test() {
-        Assertions.assertFalse(this.clearDisplayInstruction.isExecutable(null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.clearDisplayInstruction.isExecutable(null));
     }
 
     @Test
     void isExecutable_inputEmpty_returnFalse_test() {
-        Assertions.assertFalse(this.clearDisplayInstruction.isExecutable(""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.clearDisplayInstruction.isExecutable(""));
     }
 
     @Test
@@ -40,7 +40,7 @@ class ClearDisplayInstructionTest {
 
     @Test
     void run_test() {
-        this.clearDisplayInstruction.run(null);
+        this.clearDisplayInstruction.run("00E0");
         Mockito.verify(this.displayBuffer, Mockito.times(1)).reset();
         Mockito.verifyNoMoreInteractions(this.displayBuffer);
     }

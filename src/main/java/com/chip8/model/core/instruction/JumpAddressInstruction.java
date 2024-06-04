@@ -1,35 +1,24 @@
 package com.chip8.model.core.instruction;
 
-import com.chip8.api.core.instruction.Instruction;
 import com.chip8.model.core.register.ProgramCounterHandler;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
 import java.util.HexFormat;
-import java.util.Objects;
 
 @Component
-public class JumpAddressInstruction implements Instruction {
+public class JumpAddressInstruction extends InstructionAbstract {
 
-    private static final Integer COMMAND = HexFormat.fromHexDigits("1");
+    private static final String COMMAND_REGEX = "^1\\w{3}";
 
     private final ProgramCounterHandler pc;
 
     public JumpAddressInstruction(final ProgramCounterHandler pc) {
+        super(COMMAND_REGEX);
         this.pc = pc;
     }
 
     @Override
-    public Boolean isExecutable(final String data) {
-        Assert.notNull(data, "Data can not be null");
-        Assert.hasLength(data, "Data can not empty");
-        return Objects.equals(COMMAND, HexFormat.fromHexDigits(data.substring(0, 1)));
-    }
-
-    @Override
-    public void run(final String data) {
-        Assert.notNull(data, "Data can not be null");
-        Assert.hasLength(data, "Data can not empty");
+    public void execute(final String data) {
         this.pc.setPc(HexFormat.fromHexDigits(data.substring(1)));
     }
 }
