@@ -50,7 +50,7 @@ class CallAddressInstructionTest {
 
     @Test
     void run_test() {
-        Mockito.when(this.sp.getSp()).thenReturn(1);
+        Mockito.when(this.sp.get()).thenReturn(1);
         Mockito.when(this.pc.get()).thenReturn(2);
 
         this.callAddressInstruction.run("2FFF");

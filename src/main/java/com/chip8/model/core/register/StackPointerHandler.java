@@ -1,15 +1,11 @@
 package com.chip8.model.core.register;
 
 import com.chip8.api.core.register.StackPointer;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
 @Component
-@Getter
-@Setter
 public class StackPointerHandler implements StackPointer {
 
     private Integer sp;
@@ -26,6 +22,16 @@ public class StackPointerHandler implements StackPointer {
         if (Objects.nonNull(this.sp) && this.sp < 11) {
             this.sp = this.sp + 1;
         }
+    }
+
+    @Override
+    public Integer get() {
+        return this.sp;
+    }
+
+    @Override
+    public void set(final Integer data) {
+        this.sp = data;
     }
 
 }

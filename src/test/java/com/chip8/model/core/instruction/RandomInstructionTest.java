@@ -16,7 +16,7 @@ import java.util.Random;
 class RandomInstructionTest {
 
     @Mock
-    private VRegister vectorXRegister;
+    private VRegister vRegister;
 
     @Mock
     private Random random;
@@ -58,7 +58,7 @@ class RandomInstructionTest {
     void run_test() {
         Mockito.when(this.random.nextInt()).thenReturn(255);
         this.randomInstruction.run("C1FF");
-        Mockito.verify(this.vectorXRegister, Mockito.times(1)).set(1, HexFormat.fromHexDigits("FF"));
+        Mockito.verify(this.vRegister, Mockito.times(1)).set(1, HexFormat.fromHexDigits("FF"));
     }
 
 }

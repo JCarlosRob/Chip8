@@ -11,18 +11,18 @@ public class AddByteIntoVectorInstruction extends InstructionAbstract {
 
     private static final String COMMAND_REGEX = "^7\\w{3}";
 
-    private final VRegister vectorXRegister;
+    private final VRegister vRegister;
 
     @Autowired
-    public AddByteIntoVectorInstruction(final VRegister vectorXRegister) {
+    public AddByteIntoVectorInstruction(final VRegister vRegister) {
         super(COMMAND_REGEX);
-        this.vectorXRegister = vectorXRegister;
+        this.vRegister = vRegister;
     }
 
     @Override
     public void execute(final String data) {
         final Integer vx = HexFormat.fromHexDigits(data.substring(1, 2));
         final Integer kk = HexFormat.fromHexDigits(data.substring(2, 4));
-        this.vectorXRegister.add(vx, kk);
+        this.vRegister.add(vx, kk);
     }
 }

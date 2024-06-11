@@ -1,8 +1,10 @@
 package com.chip8.model.core.memory;
 
 import com.chip8.api.core.memory.Memory;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+@Component
 public class MemoryStack implements Memory {
 
     private static final Integer MEMORY_SIZE = 20;

@@ -11,20 +11,20 @@ public class ShiftLeftInstruction extends InstructionAbstract {
 
     private static final String COMMAND_REGEX = "^8\\w{2}E$";
 
-    private final VRegister vectorXRegister;
+    private final VRegister vRegister;
 
     @Autowired
-    public ShiftLeftInstruction(final VRegister vectorXRegister) {
+    public ShiftLeftInstruction(final VRegister vRegister) {
         super(COMMAND_REGEX);
-        this.vectorXRegister = vectorXRegister;
+        this.vRegister = vRegister;
     }
 
     @Override
     public void execute(final String data) {
         final Integer positionVx = HexFormat.fromHexDigits(data.substring(1, 2));
-        final Integer vx = this.vectorXRegister.get(HexFormat.fromHexDigits(data.substring(1, 2)));
+        final Integer vx = this.vRegister.get(HexFormat.fromHexDigits(data.substring(1, 2)));
 
-        this.vectorXRegister.set(positionVx, vx * 2 & 255);
-        this.vectorXRegister.set(15, vx > 127 ? 1 : 0);
+        this.vRegister.set(positionVx, vx * 2 & 255);
+        this.vRegister.set(15, vx > 127 ? 1 : 0);
     }
 }

@@ -1,11 +1,17 @@
 package com.chip8.model.core.register;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class IndexRegisterHandlerTest {
 
-    private final IndexRegisterHandler viRegisterHandler = new IndexRegisterHandler();
+    private IndexRegisterHandler viRegisterHandler;
+
+    @BeforeEach
+    void setUp() {
+        this.viRegisterHandler = new IndexRegisterHandler();
+    }
 
     @Test
     void getRegister_test() {

@@ -1,13 +1,19 @@
 package com.chip8.model.loader;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
 class LoaderRomHandlerTest {
 
-    private final LoaderRomHandler loaderRomHandler = new LoaderRomHandler();
+    private LoaderRomHandler loaderRomHandler;
+
+    @BeforeEach
+    void setUp() {
+        this.loaderRomHandler = new LoaderRomHandler();
+    }
 
     @Test
     void load_test() throws IOException {

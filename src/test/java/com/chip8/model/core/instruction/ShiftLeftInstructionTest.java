@@ -15,7 +15,7 @@ import java.util.HexFormat;
 public class ShiftLeftInstructionTest {
 
     @Mock
-    private VRegister vectorXRegister;
+    private VRegister vRegister;
 
     @InjectMocks
     private ShiftLeftInstruction shiftLeftInstruction;
@@ -52,21 +52,21 @@ public class ShiftLeftInstructionTest {
 
     @Test
     void run_vfSet1_test() {
-        Mockito.when(this.vectorXRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(128);
+        Mockito.when(this.vRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(128);
         this.shiftLeftInstruction.run("8AF2");
-        Mockito.verify(this.vectorXRegister, Mockito.times(1))
+        Mockito.verify(this.vRegister, Mockito.times(1))
                 .set(HexFormat.fromHexDigits("A"), 0);
-        Mockito.verify(this.vectorXRegister, Mockito.times(1))
+        Mockito.verify(this.vRegister, Mockito.times(1))
                 .set(HexFormat.fromHexDigits("F"), 1);
     }
 
     @Test
     void run_withoutCarry_test() {
-        Mockito.when(this.vectorXRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(127);
+        Mockito.when(this.vRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(127);
         this.shiftLeftInstruction.run("8AF2");
-        Mockito.verify(this.vectorXRegister, Mockito.times(1))
+        Mockito.verify(this.vRegister, Mockito.times(1))
                 .set(HexFormat.fromHexDigits("A"), 254);
-        Mockito.verify(this.vectorXRegister, Mockito.times(1))
+        Mockito.verify(this.vRegister, Mockito.times(1))
                 .set(HexFormat.fromHexDigits("F"), 0);
     }
 

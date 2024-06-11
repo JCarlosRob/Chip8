@@ -19,16 +19,13 @@ class SkipNextIsNotEqualsVectorInstructionTest {
     private ProgramCounterHandler pc;
 
     @Mock
-    private VRegister vectorXRegister;
-
-    @Mock
-    private VRegister vectorYRegister;
+    private VRegister vRegister;
 
     private SkipNextIsNotEqualsVectorInstruction skipNextIsNotEqualsVectorInstruction;
 
     @BeforeEach
     public void setUp() {
-        this.skipNextIsNotEqualsVectorInstruction = new SkipNextIsNotEqualsVectorInstruction(this.pc, this.vectorXRegister, this.vectorYRegister);
+        this.skipNextIsNotEqualsVectorInstruction = new SkipNextIsNotEqualsVectorInstruction(this.pc, this.vRegister);
     }
 
     @Test
@@ -63,16 +60,16 @@ class SkipNextIsNotEqualsVectorInstructionTest {
 
     @Test
     void run_vxIsEqualsToData_invokeNext_test() {
-        Mockito.when(this.vectorXRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(254);
-        Mockito.when(this.vectorYRegister.get(HexFormat.fromHexDigits("F"))).thenReturn(253);
+        Mockito.when(this.vRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(254);
+        Mockito.when(this.vRegister.get(HexFormat.fromHexDigits("F"))).thenReturn(253);
         this.skipNextIsNotEqualsVectorInstruction.run("9AF0");
         Mockito.verify(this.pc, Mockito.times(1)).next(2);
     }
 
     @Test
     void run_vxIsNotEqualsToData_invokeNext_test() {
-        Mockito.when(this.vectorXRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(254);
-        Mockito.when(this.vectorYRegister.get(HexFormat.fromHexDigits("F"))).thenReturn(254);
+        Mockito.when(this.vRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(254);
+        Mockito.when(this.vRegister.get(HexFormat.fromHexDigits("F"))).thenReturn(254);
         this.skipNextIsNotEqualsVectorInstruction.run("9AF0");
         Mockito.verifyNoInteractions(this.pc);
     }

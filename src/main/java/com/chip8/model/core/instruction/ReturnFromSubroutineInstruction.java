@@ -1,8 +1,8 @@
 package com.chip8.model.core.instruction;
 
 import com.chip8.api.core.memory.Memory;
-import com.chip8.model.core.register.ProgramCounterHandler;
-import com.chip8.model.core.register.StackPointerHandler;
+import com.chip8.api.core.register.ProgramCounter;
+import com.chip8.api.core.register.StackPointer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,14 +11,14 @@ public class ReturnFromSubroutineInstruction extends InstructionAbstract {
 
     private static final String COMMAND_REGEX = "00EE";
 
-    private final ProgramCounterHandler pc;
+    private final ProgramCounter pc;
 
-    private final StackPointerHandler sp;
+    private final StackPointer sp;
 
     private final Memory memoryStack;
 
     @Autowired
-    public ReturnFromSubroutineInstruction(final ProgramCounterHandler pc, final StackPointerHandler sp, final Memory memoryStack) {
+    public ReturnFromSubroutineInstruction(final ProgramCounter pc, final StackPointer sp, final Memory memoryStack) {
         super(COMMAND_REGEX);
         this.pc = pc;
         this.sp = sp;
@@ -28,6 +28,6 @@ public class ReturnFromSubroutineInstruction extends InstructionAbstract {
     @Override
     public void execute(final String data) {
         this.sp.decrement();
-        this.pc.set(this.memoryStack.read(this.sp.getSp()));
+        this.pc.set(this.memoryStack.read(this.sp.get()));
     }
 }

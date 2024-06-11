@@ -1,8 +1,10 @@
 package com.chip8.model.core.register;
 
 import com.chip8.api.core.register.VRegister;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+@Component
 public class VRegisterHandler implements VRegister {
 
     private static final Integer MAX_LENGTH_V_REGISTER = 16;

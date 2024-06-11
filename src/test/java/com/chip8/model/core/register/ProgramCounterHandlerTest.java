@@ -1,11 +1,17 @@
 package com.chip8.model.core.register;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ProgramCounterHandlerTest {
 
-    private final ProgramCounterHandler programCounterHandler = new ProgramCounterHandler();
+    private ProgramCounterHandler programCounterHandler;
+
+    @BeforeEach
+    void setUp() {
+        this.programCounterHandler = new ProgramCounterHandler();
+    }
 
     @Test
     void set_test() {

@@ -19,7 +19,7 @@ class SkipNextIsNotEqualsByteInstructionTest {
     private ProgramCounterHandler pc;
 
     @Mock
-    private VRegister vectorXRegister;
+    private VRegister vRegister;
 
     @InjectMocks
     private SkipNextIsNotEqualsByteInstruction skipNextIsNotEqualsByteInstruction;
@@ -56,7 +56,7 @@ class SkipNextIsNotEqualsByteInstructionTest {
 
     @Test
     void run_vxIsEqualsToData_invokeNext_test() {
-        Mockito.when(this.vectorXRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(254);
+        Mockito.when(this.vRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(254);
 
         this.skipNextIsNotEqualsByteInstruction.run("4AFF");
 
@@ -65,7 +65,7 @@ class SkipNextIsNotEqualsByteInstructionTest {
 
     @Test
     void run_vxIsNotEqualsToData_invokeNext_test() {
-        Mockito.when(this.vectorXRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(255);
+        Mockito.when(this.vRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(255);
 
         this.skipNextIsNotEqualsByteInstruction.run("4AFF");
 

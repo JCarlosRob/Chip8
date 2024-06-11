@@ -15,7 +15,7 @@ import java.util.HexFormat;
 class LoadByteIntoVectorInstructionTest {
 
     @Mock
-    private VRegister vectorXRegister;
+    private VRegister vRegister;
 
     @InjectMocks
     private LoadByteIntoVectorInstruction loadByteIntoVectorInstruction;
@@ -53,7 +53,7 @@ class LoadByteIntoVectorInstructionTest {
     @Test
     void run_test() {
         this.loadByteIntoVectorInstruction.run("6AFF");
-        Mockito.verify(this.vectorXRegister, Mockito.times(1))
+        Mockito.verify(this.vRegister, Mockito.times(1))
                 .set(HexFormat.fromHexDigits("A"), HexFormat.fromHexDigits("FF"));
     }
 

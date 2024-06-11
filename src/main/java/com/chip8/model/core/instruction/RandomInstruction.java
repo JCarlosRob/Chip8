@@ -11,19 +11,19 @@ public class RandomInstruction extends InstructionAbstract {
 
     private static final String COMMAND_REGEX = "^C\\w{3}";
 
-    private final VRegister vectorXRegister;
+    private final VRegister vRegister;
 
     private final Random random;
 
-    public RandomInstruction(final VRegister vectorXRegister, final Random random) {
+    public RandomInstruction(final VRegister vRegister, final Random random) {
         super(COMMAND_REGEX);
-        this.vectorXRegister = vectorXRegister;
+        this.vRegister = vRegister;
         this.random = random;
     }
 
     @Override
     public void execute(final String data) {
         final Integer randomResult = HexFormat.fromHexDigits(data.substring(2)) & (this.random.nextInt() & 255);
-        this.vectorXRegister.set(HexFormat.fromHexDigits(data.substring(1, 2)), randomResult);
+        this.vRegister.set(HexFormat.fromHexDigits(data.substring(1, 2)), randomResult);
     }
 }

@@ -1,13 +1,19 @@
 package com.chip8.model.core.memory;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 class MemoryRamTest {
 
-    private final MemoryRam memoryRam = new MemoryRam();
+    private MemoryRam memoryRam;
+
+    @BeforeEach
+    void setUp() {
+        this.memoryRam = new MemoryRam();
+    }
 
     @Test
     void read_inputMinPosition_test() {

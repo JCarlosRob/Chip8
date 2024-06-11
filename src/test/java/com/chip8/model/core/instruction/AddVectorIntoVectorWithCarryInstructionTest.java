@@ -2,9 +2,9 @@ package com.chip8.model.core.instruction;
 
 import com.chip8.api.core.register.VRegister;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -15,17 +15,10 @@ import java.util.HexFormat;
 class AddVectorIntoVectorWithCarryInstructionTest {
 
     @Mock
-    private VRegister vectorXRegister;
+    private VRegister vRegister;
 
-    @Mock
-    private VRegister vectorYRegister;
-
+    @InjectMocks
     private AddVectorIntoVectorWithCarryInstruction addVectorIntoVectorWithCarryInstruction;
-
-    @BeforeEach
-    void setUp() {
-        this.addVectorIntoVectorWithCarryInstruction = new AddVectorIntoVectorWithCarryInstruction(this.vectorXRegister, this.vectorYRegister);
-    }
 
     @Test
     void isExecutable_inputNull_returnException_test() {
@@ -59,23 +52,23 @@ class AddVectorIntoVectorWithCarryInstructionTest {
 
     @Test
     void run_withCarry_test() {
-        Mockito.when(this.vectorXRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(255);
-        Mockito.when(this.vectorYRegister.get(HexFormat.fromHexDigits("F"))).thenReturn(1);
+        Mockito.when(this.vRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(255);
+        Mockito.when(this.vRegister.get(HexFormat.fromHexDigits("F"))).thenReturn(1);
         this.addVectorIntoVectorWithCarryInstruction.run("8AF2");
-        Mockito.verify(this.vectorXRegister, Mockito.times(1))
+        Mockito.verify(this.vRegister, Mockito.times(1))
                 .set(HexFormat.fromHexDigits("A"), 0);
-        Mockito.verify(this.vectorXRegister, Mockito.times(1))
+        Mockito.verify(this.vRegister, Mockito.times(1))
                 .set(HexFormat.fromHexDigits("F"), 1);
     }
 
     @Test
     void run_withoutCarry_test() {
-        Mockito.when(this.vectorXRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(254);
-        Mockito.when(this.vectorYRegister.get(HexFormat.fromHexDigits("F"))).thenReturn(1);
+        Mockito.when(this.vRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(254);
+        Mockito.when(this.vRegister.get(HexFormat.fromHexDigits("F"))).thenReturn(1);
         this.addVectorIntoVectorWithCarryInstruction.run("8AF2");
-        Mockito.verify(this.vectorXRegister, Mockito.times(1))
+        Mockito.verify(this.vRegister, Mockito.times(1))
                 .set(HexFormat.fromHexDigits("A"), 255);
-        Mockito.verify(this.vectorXRegister, Mockito.times(1))
+        Mockito.verify(this.vRegister, Mockito.times(1))
                 .set(HexFormat.fromHexDigits("F"), 0);
     }
 

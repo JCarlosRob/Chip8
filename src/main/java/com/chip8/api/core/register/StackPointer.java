@@ -6,4 +6,8 @@ public interface StackPointer {
 
     void increase();
 
+    Integer get();
+
+    void set(Integer data);
+
 }

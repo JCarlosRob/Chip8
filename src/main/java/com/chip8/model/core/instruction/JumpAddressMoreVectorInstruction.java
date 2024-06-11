@@ -1,7 +1,7 @@
 package com.chip8.model.core.instruction;
 
+import com.chip8.api.core.register.ProgramCounter;
 import com.chip8.api.core.register.VRegister;
-import com.chip8.model.core.register.ProgramCounterHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,19 +12,19 @@ public class JumpAddressMoreVectorInstruction extends InstructionAbstract {
 
     private static final String COMMAND_REGEX = "^B\\w{3}";
 
-    private final ProgramCounterHandler pc;
+    private final ProgramCounter pc;
 
-    private final VRegister vectorXRegister;
+    private final VRegister vRegister;
 
     @Autowired
-    public JumpAddressMoreVectorInstruction(final ProgramCounterHandler pc, final VRegister vectorXRegister) {
+    public JumpAddressMoreVectorInstruction(final ProgramCounter pc, final VRegister vRegister) {
         super(COMMAND_REGEX);
         this.pc = pc;
-        this.vectorXRegister = vectorXRegister;
+        this.vRegister = vRegister;
     }
 
     @Override
     public void execute(final String data) {
-        this.pc.set(HexFormat.fromHexDigits(data.substring(1)) + this.vectorXRegister.get(0));
+        this.pc.set(HexFormat.fromHexDigits(data.substring(1)) + this.vRegister.get(0));
     }
 }

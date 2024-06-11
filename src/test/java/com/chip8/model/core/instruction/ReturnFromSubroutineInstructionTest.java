@@ -48,7 +48,7 @@ class ReturnFromSubroutineInstructionTest {
 
     @Test
     void run_test() {
-        Mockito.when(this.sp.getSp()).thenReturn(1);
+        Mockito.when(this.sp.get()).thenReturn(1);
         Mockito.when(this.memoryStack.read(1)).thenReturn(2);
         this.returnFromSubroutineInstruction.run("00EE");
         Mockito.verify(this.pc, Mockito.times(1)).set(2);

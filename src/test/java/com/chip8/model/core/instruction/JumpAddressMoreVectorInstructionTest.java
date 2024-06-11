@@ -19,13 +19,13 @@ public class JumpAddressMoreVectorInstructionTest {
     private ProgramCounterHandler pc;
 
     @Mock
-    private VRegister vectorXRegister;
+    private VRegister vRegister;
 
     private JumpAddressMoreVectorInstruction jumpAddressMoreVectorInstruction;
 
     @BeforeEach
     public void setUp() {
-        this.jumpAddressMoreVectorInstruction = new JumpAddressMoreVectorInstruction(this.pc, this.vectorXRegister);
+        this.jumpAddressMoreVectorInstruction = new JumpAddressMoreVectorInstruction(this.pc, this.vRegister);
     }
 
     @Test
@@ -60,7 +60,7 @@ public class JumpAddressMoreVectorInstructionTest {
 
     @Test
     void run_test() {
-        Mockito.when(this.vectorXRegister.get(0)).thenReturn(1);
+        Mockito.when(this.vRegister.get(0)).thenReturn(1);
         this.jumpAddressMoreVectorInstruction.run("BFFE");
         Mockito.verify(this.pc, Mockito.times(1)).set(HexFormat.fromHexDigits("FFF"));
     }

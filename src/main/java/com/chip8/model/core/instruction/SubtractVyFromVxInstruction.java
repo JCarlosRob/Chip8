@@ -11,24 +11,21 @@ public class SubtractVyFromVxInstruction extends InstructionAbstract {
 
     private static final String COMMAND_REGEX = "^8\\w{2}7$";
 
-    private final VRegister vectorXRegister;
-
-    private final VRegister vectorYRegister;
+    private final VRegister vRegister;
 
     @Autowired
-    public SubtractVyFromVxInstruction(final VRegister vectorXRegister, final VRegister vectorYRegister) {
+    public SubtractVyFromVxInstruction(final VRegister vRegister) {
         super(COMMAND_REGEX);
-        this.vectorXRegister = vectorXRegister;
-        this.vectorYRegister = vectorYRegister;
+        this.vRegister = vRegister;
     }
 
     @Override
     public void execute(final String data) {
         final Integer positionVx = HexFormat.fromHexDigits(data.substring(1, 2));
-        final Integer vx = this.vectorXRegister.get(HexFormat.fromHexDigits(data.substring(1, 2)));
-        final Integer vy = this.vectorYRegister.get(HexFormat.fromHexDigits(data.substring(2, 3)));
+        final Integer vx = this.vRegister.get(HexFormat.fromHexDigits(data.substring(1, 2)));
+        final Integer vy = this.vRegister.get(HexFormat.fromHexDigits(data.substring(2, 3)));
 
-        this.vectorXRegister.set(positionVx, vy - vx);
-        this.vectorXRegister.set(15, vy > vx ? 1 : 0);
+        this.vRegister.set(positionVx, vy - vx);
+        this.vRegister.set(15, vy > vx ? 1 : 0);
     }
 }

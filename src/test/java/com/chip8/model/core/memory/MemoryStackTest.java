@@ -1,11 +1,17 @@
 package com.chip8.model.core.memory;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class MemoryStackTest {
 
-    private final MemoryStack memoryStack = new MemoryStack();
+    private MemoryStack memoryStack;
+
+    @BeforeEach
+    void setUp() {
+        this.memoryStack = new MemoryStack();
+    }
 
     @Test
     void read_inputMinPosition_test() {
