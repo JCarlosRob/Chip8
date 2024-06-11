@@ -53,7 +53,7 @@ class SysCallInstructionTest {
     @Test
     void run_test() {
         this.sysCallInstruction.run("0FFF");
-        Mockito.verify(this.pc, Mockito.times(1)).setPc(HexFormat.fromHexDigits("FFF"));
+        Mockito.verify(this.pc, Mockito.times(1)).set(HexFormat.fromHexDigits("FFF"));
     }
 
 }

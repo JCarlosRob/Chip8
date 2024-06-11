@@ -1,6 +1,6 @@
 package com.chip8.configure;
 
-import com.chip8.model.core.register.VectorRegisterHandler;
+import com.chip8.model.core.register.VRegisterHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,13 +10,13 @@ import java.util.Random;
 public class AppConfigure {
 
     @Bean("vectorXRegister")
-    public VectorRegisterHandler vectorXRegister() {
-        return new VectorRegisterHandler();
+    public VRegisterHandler vectorXRegister() {
+        return new VRegisterHandler();
     }
 
     @Bean("vectorYRegister")
-    public VectorRegisterHandler vectorYRegister() {
-        return new VectorRegisterHandler();
+    public VRegisterHandler vectorYRegister() {
+        return new VRegisterHandler();
     }
 
     @Bean

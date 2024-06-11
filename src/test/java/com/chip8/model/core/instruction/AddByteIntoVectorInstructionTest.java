@@ -1,6 +1,6 @@
 package com.chip8.model.core.instruction;
 
-import com.chip8.api.core.register.VectorRegister;
+import com.chip8.api.core.register.VRegister;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +15,7 @@ import java.util.HexFormat;
 class AddByteIntoVectorInstructionTest {
 
     @Mock
-    private VectorRegister vectorXRegister;
+    private VRegister vectorXRegister;
 
     @InjectMocks
     private AddByteIntoVectorInstruction addByteIntoVectorInstruction;

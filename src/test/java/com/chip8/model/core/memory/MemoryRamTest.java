@@ -3,6 +3,8 @@ package com.chip8.model.core.memory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 class MemoryRamTest {
 
     private final MemoryRam memoryRam = new MemoryRam();
@@ -59,6 +61,42 @@ class MemoryRamTest {
     @Test
     void write_inputPositionAndDataNull_returnException_test() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.write(1, null));
+    }
+
+    @Test
+    void read_inputStartPositionNull_returnException_test() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.read(null, 0));
+    }
+
+    @Test
+    void read_inputEndPositionNull_returnException_test() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.read(0, null));
+    }
+
+    @Test
+    void read_inputEndPositionLessThanStartPosition_returnException_test() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.read(1, 0));
+    }
+
+    @Test
+    void read_inputStartPositionNegative_returnException_test() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.read(-1, 1));
+    }
+
+    @Test
+    void read_inputEndPositionEqualsZero_returnException_test() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.read(0, 0));
+    }
+
+    @Test
+    void read_returnSegmentOfData_test() {
+        this.memoryRam.write(0, 1);
+        this.memoryRam.write(1, 2);
+        this.memoryRam.write(2, 3);
+        this.memoryRam.write(3, 4);
+        this.memoryRam.write(4, 5);
+        final Integer[] result = this.memoryRam.read(1, 3);
+        Assertions.assertEquals(0, Arrays.compare(new Integer[]{2, 3, 4}, result));
     }
 
 }

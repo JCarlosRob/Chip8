@@ -1,6 +1,6 @@
 package com.chip8.model.core.instruction;
 
-import com.chip8.api.core.register.IRegister;
+import com.chip8.api.core.register.IndexRegister;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +15,7 @@ import java.util.HexFormat;
 class LoadAddressInstructionTest {
 
     @Mock
-    private IRegister iRegister;
+    private IndexRegister indexRegister;
 
     @InjectMocks
     private LoadAddressInstruction loadAddressInstruction;
@@ -53,7 +53,7 @@ class LoadAddressInstructionTest {
     @Test
     void run_test() {
         this.loadAddressInstruction.run("AFFF");
-        Mockito.verify(this.iRegister, Mockito.times(1)).setVI(HexFormat.fromHexDigits("FFF"));
+        Mockito.verify(this.indexRegister, Mockito.times(1)).set(HexFormat.fromHexDigits("FFF"));
     }
 
 }

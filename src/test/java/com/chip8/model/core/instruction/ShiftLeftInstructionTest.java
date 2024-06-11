@@ -1,6 +1,6 @@
 package com.chip8.model.core.instruction;
 
-import com.chip8.api.core.register.VectorRegister;
+import com.chip8.api.core.register.VRegister;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +15,7 @@ import java.util.HexFormat;
 public class ShiftLeftInstructionTest {
 
     @Mock
-    private VectorRegister vectorXRegister;
+    private VRegister vectorXRegister;
 
     @InjectMocks
     private ShiftLeftInstruction shiftLeftInstruction;
@@ -52,22 +52,22 @@ public class ShiftLeftInstructionTest {
 
     @Test
     void run_vfSet1_test() {
-        Mockito.when(this.vectorXRegister.getVRegister(HexFormat.fromHexDigits("A"))).thenReturn(128);
+        Mockito.when(this.vectorXRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(128);
         this.shiftLeftInstruction.run("8AF2");
         Mockito.verify(this.vectorXRegister, Mockito.times(1))
-                .setVRegister(HexFormat.fromHexDigits("A"), 0);
+                .set(HexFormat.fromHexDigits("A"), 0);
         Mockito.verify(this.vectorXRegister, Mockito.times(1))
-                .setVRegister(HexFormat.fromHexDigits("F"), 1);
+                .set(HexFormat.fromHexDigits("F"), 1);
     }
 
     @Test
     void run_withoutCarry_test() {
-        Mockito.when(this.vectorXRegister.getVRegister(HexFormat.fromHexDigits("A"))).thenReturn(127);
+        Mockito.when(this.vectorXRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(127);
         this.shiftLeftInstruction.run("8AF2");
         Mockito.verify(this.vectorXRegister, Mockito.times(1))
-                .setVRegister(HexFormat.fromHexDigits("A"), 254);
+                .set(HexFormat.fromHexDigits("A"), 254);
         Mockito.verify(this.vectorXRegister, Mockito.times(1))
-                .setVRegister(HexFormat.fromHexDigits("F"), 0);
+                .set(HexFormat.fromHexDigits("F"), 0);
     }
 
 }

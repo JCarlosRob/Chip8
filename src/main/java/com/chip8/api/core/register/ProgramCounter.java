@@ -2,9 +2,9 @@ package com.chip8.api.core.register;
 
 public interface ProgramCounter {
 
-    Integer getPc();
+    Integer get();
 
-    void setPc(Integer address);
+    void set(Integer address);
 
     void next();
 

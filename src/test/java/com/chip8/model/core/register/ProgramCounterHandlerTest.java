@@ -8,36 +8,36 @@ class ProgramCounterHandlerTest {
     private final ProgramCounterHandler programCounterHandler = new ProgramCounterHandler();
 
     @Test
-    void setPc_test() {
-        this.programCounterHandler.setPc(0);
-        Assertions.assertEquals(0, this.programCounterHandler.getPc());
+    void set_test() {
+        this.programCounterHandler.set(0);
+        Assertions.assertEquals(0, this.programCounterHandler.get());
     }
 
     @Test
-    void setPc_inputNull_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.programCounterHandler.setPc(null));
+    void set_inputNull_returnException_test() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.programCounterHandler.set(null));
     }
 
     @Test
-    void setPc_inputNegative_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.programCounterHandler.setPc(-1));
+    void set_inputNegative_returnException_test() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.programCounterHandler.set(-1));
     }
 
     @Test
-    void setPc_inputGreaterThan4095_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.programCounterHandler.setPc(4096));
+    void set_inputGreaterThan4095_returnException_test() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.programCounterHandler.set(4096));
     }
 
     @Test
     void next_returnIncreaseBy1_test() {
         this.programCounterHandler.next();
-        Assertions.assertEquals(1, this.programCounterHandler.getPc());
+        Assertions.assertEquals(1, this.programCounterHandler.get());
     }
 
     @Test
     void next_input2Times_returnIncreaseBy2_test() {
         this.programCounterHandler.next(2);
-        Assertions.assertEquals(2, this.programCounterHandler.getPc());
+        Assertions.assertEquals(2, this.programCounterHandler.get());
     }
 
     @Test

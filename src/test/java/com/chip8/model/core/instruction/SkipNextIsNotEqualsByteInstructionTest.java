@@ -1,6 +1,6 @@
 package com.chip8.model.core.instruction;
 
-import com.chip8.api.core.register.VectorRegister;
+import com.chip8.api.core.register.VRegister;
 import com.chip8.model.core.register.ProgramCounterHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ class SkipNextIsNotEqualsByteInstructionTest {
     private ProgramCounterHandler pc;
 
     @Mock
-    private VectorRegister vectorXRegister;
+    private VRegister vectorXRegister;
 
     @InjectMocks
     private SkipNextIsNotEqualsByteInstruction skipNextIsNotEqualsByteInstruction;
@@ -56,7 +56,7 @@ class SkipNextIsNotEqualsByteInstructionTest {
 
     @Test
     void run_vxIsEqualsToData_invokeNext_test() {
-        Mockito.when(this.vectorXRegister.getVRegister(HexFormat.fromHexDigits("A"))).thenReturn(254);
+        Mockito.when(this.vectorXRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(254);
 
         this.skipNextIsNotEqualsByteInstruction.run("4AFF");
 
@@ -65,7 +65,7 @@ class SkipNextIsNotEqualsByteInstructionTest {
 
     @Test
     void run_vxIsNotEqualsToData_invokeNext_test() {
-        Mockito.when(this.vectorXRegister.getVRegister(HexFormat.fromHexDigits("A"))).thenReturn(255);
+        Mockito.when(this.vectorXRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(255);
 
         this.skipNextIsNotEqualsByteInstruction.run("4AFF");
 

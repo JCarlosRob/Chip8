@@ -19,6 +19,6 @@ public class SysCallInstruction extends InstructionAbstract {
 
     @Override
     public void execute(final String data) {
-        this.pc.setPc(HexFormat.fromHexDigits(data.substring(1)));
+        this.pc.set(HexFormat.fromHexDigits(data.substring(1)));
     }
 }

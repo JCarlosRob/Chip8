@@ -1,6 +1,6 @@
 package com.chip8.model.core.instruction;
 
-import com.chip8.api.core.register.VectorRegister;
+import com.chip8.api.core.register.VRegister;
 import com.chip8.model.core.register.ProgramCounterHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,10 +19,10 @@ class SkipNextIsNotEqualsVectorInstructionTest {
     private ProgramCounterHandler pc;
 
     @Mock
-    private VectorRegister vectorXRegister;
+    private VRegister vectorXRegister;
 
     @Mock
-    private VectorRegister vectorYRegister;
+    private VRegister vectorYRegister;
 
     private SkipNextIsNotEqualsVectorInstruction skipNextIsNotEqualsVectorInstruction;
 
@@ -63,16 +63,16 @@ class SkipNextIsNotEqualsVectorInstructionTest {
 
     @Test
     void run_vxIsEqualsToData_invokeNext_test() {
-        Mockito.when(this.vectorXRegister.getVRegister(HexFormat.fromHexDigits("A"))).thenReturn(254);
-        Mockito.when(this.vectorYRegister.getVRegister(HexFormat.fromHexDigits("F"))).thenReturn(253);
+        Mockito.when(this.vectorXRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(254);
+        Mockito.when(this.vectorYRegister.get(HexFormat.fromHexDigits("F"))).thenReturn(253);
         this.skipNextIsNotEqualsVectorInstruction.run("9AF0");
         Mockito.verify(this.pc, Mockito.times(1)).next(2);
     }
 
     @Test
     void run_vxIsNotEqualsToData_invokeNext_test() {
-        Mockito.when(this.vectorXRegister.getVRegister(HexFormat.fromHexDigits("A"))).thenReturn(254);
-        Mockito.when(this.vectorYRegister.getVRegister(HexFormat.fromHexDigits("F"))).thenReturn(254);
+        Mockito.when(this.vectorXRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(254);
+        Mockito.when(this.vectorYRegister.get(HexFormat.fromHexDigits("F"))).thenReturn(254);
         this.skipNextIsNotEqualsVectorInstruction.run("9AF0");
         Mockito.verifyNoInteractions(this.pc);
     }

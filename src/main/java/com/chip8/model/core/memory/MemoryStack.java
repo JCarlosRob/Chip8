@@ -25,4 +25,9 @@ public class MemoryStack implements Memory {
         Assert.isTrue(position < MEMORY_SIZE, "The position can not greater than " + MEMORY_SIZE);
         return this.memory[position];
     }
+
+    @Override
+    public Integer[] read(final Integer start, final Integer end) {
+        return new Integer[0];
+    }
 }

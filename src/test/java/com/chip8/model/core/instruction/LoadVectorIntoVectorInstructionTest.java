@@ -1,6 +1,6 @@
 package com.chip8.model.core.instruction;
 
-import com.chip8.api.core.register.VectorRegister;
+import com.chip8.api.core.register.VRegister;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,10 +15,10 @@ import java.util.HexFormat;
 class LoadVectorIntoVectorInstructionTest {
 
     @Mock
-    private VectorRegister vectorXRegister;
+    private VRegister vectorXRegister;
 
     @Mock
-    private VectorRegister vectorYRegister;
+    private VRegister vectorYRegister;
 
     private LoadVectorIntoVectorInstruction loadVectorIntoVectorInstruction;
 
@@ -59,17 +59,17 @@ class LoadVectorIntoVectorInstructionTest {
 
     @Test
     void run_vyEqualsVx_test() {
-        Mockito.when(this.vectorXRegister.getVRegister(HexFormat.fromHexDigits("A"))).thenReturn(1);
-        Mockito.when(this.vectorYRegister.getVRegister(HexFormat.fromHexDigits("F"))).thenReturn(1);
+        Mockito.when(this.vectorXRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(1);
+        Mockito.when(this.vectorYRegister.get(HexFormat.fromHexDigits("F"))).thenReturn(1);
         this.loadVectorIntoVectorInstruction.run("8AF0");
         Mockito.verify(this.vectorXRegister, Mockito.times(1))
-                .setVRegister(HexFormat.fromHexDigits("A"), 1);
+                .set(HexFormat.fromHexDigits("A"), 1);
     }
 
     @Test
     void run_vyNotEqualsVx_test() {
-        Mockito.when(this.vectorXRegister.getVRegister(HexFormat.fromHexDigits("A"))).thenReturn(1);
-        Mockito.when(this.vectorYRegister.getVRegister(HexFormat.fromHexDigits("F"))).thenReturn(2);
+        Mockito.when(this.vectorXRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(1);
+        Mockito.when(this.vectorYRegister.get(HexFormat.fromHexDigits("F"))).thenReturn(2);
         this.loadVectorIntoVectorInstruction.run("8AF0");
         Mockito.verifyNoMoreInteractions(this.vectorXRegister);
     }

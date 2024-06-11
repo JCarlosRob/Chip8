@@ -6,4 +6,6 @@ public interface Memory {
 
     Integer read(Integer position);
 
+    Integer[] read(Integer start, Integer end);
+
 }

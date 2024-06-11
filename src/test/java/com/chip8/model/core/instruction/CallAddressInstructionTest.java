@@ -51,13 +51,13 @@ class CallAddressInstructionTest {
     @Test
     void run_test() {
         Mockito.when(this.sp.getSp()).thenReturn(1);
-        Mockito.when(this.pc.getPc()).thenReturn(2);
+        Mockito.when(this.pc.get()).thenReturn(2);
 
         this.callAddressInstruction.run("2FFF");
 
         Mockito.verify(this.memoryStack, Mockito.times(1)).write(1, 2);
         Mockito.verify(this.sp, Mockito.times(1)).increase();
-        Mockito.verify(this.pc, Mockito.times(1)).setPc(HexFormat.fromHexDigits("2FFF".substring(1)));
+        Mockito.verify(this.pc, Mockito.times(1)).set(HexFormat.fromHexDigits("2FFF".substring(1)));
     }
 
 }

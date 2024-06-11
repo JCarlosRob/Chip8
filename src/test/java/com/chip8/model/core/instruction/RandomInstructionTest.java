@@ -1,6 +1,6 @@
 package com.chip8.model.core.instruction;
 
-import com.chip8.api.core.register.VectorRegister;
+import com.chip8.api.core.register.VRegister;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +16,7 @@ import java.util.Random;
 class RandomInstructionTest {
 
     @Mock
-    private VectorRegister vectorXRegister;
+    private VRegister vectorXRegister;
 
     @Mock
     private Random random;
@@ -58,7 +58,7 @@ class RandomInstructionTest {
     void run_test() {
         Mockito.when(this.random.nextInt()).thenReturn(255);
         this.randomInstruction.run("C1FF");
-        Mockito.verify(this.vectorXRegister, Mockito.times(1)).setVRegister(1, HexFormat.fromHexDigits("FF"));
+        Mockito.verify(this.vectorXRegister, Mockito.times(1)).set(1, HexFormat.fromHexDigits("FF"));
     }
 
 }

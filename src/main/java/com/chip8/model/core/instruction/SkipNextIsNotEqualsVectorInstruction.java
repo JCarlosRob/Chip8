@@ -1,6 +1,6 @@
 package com.chip8.model.core.instruction;
 
-import com.chip8.api.core.register.VectorRegister;
+import com.chip8.api.core.register.VRegister;
 import com.chip8.model.core.register.ProgramCounterHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,12 +15,12 @@ public class SkipNextIsNotEqualsVectorInstruction extends InstructionAbstract {
 
     private final ProgramCounterHandler pc;
 
-    private final VectorRegister vectorXRegister;
+    private final VRegister vectorXRegister;
 
-    private final VectorRegister vectorYRegister;
+    private final VRegister vectorYRegister;
 
     @Autowired
-    public SkipNextIsNotEqualsVectorInstruction(final ProgramCounterHandler pc, final VectorRegister vectorXRegister, final VectorRegister vectorYRegister) {
+    public SkipNextIsNotEqualsVectorInstruction(final ProgramCounterHandler pc, final VRegister vectorXRegister, final VRegister vectorYRegister) {
         super(COMMAND_REGEX);
         this.pc = pc;
         this.vectorXRegister = vectorXRegister;
@@ -32,7 +32,7 @@ public class SkipNextIsNotEqualsVectorInstruction extends InstructionAbstract {
         final Integer vx = HexFormat.fromHexDigits(data.substring(1, 2));
         final Integer vy = HexFormat.fromHexDigits(data.substring(2, 3));
 
-        if (!Objects.equals(this.vectorXRegister.getVRegister(vx), this.vectorYRegister.getVRegister(vy))) {
+        if (!Objects.equals(this.vectorXRegister.get(vx), this.vectorYRegister.get(vy))) {
             this.pc.next(2);
         }
     }

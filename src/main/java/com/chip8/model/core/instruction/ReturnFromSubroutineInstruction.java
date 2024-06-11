@@ -28,6 +28,6 @@ public class ReturnFromSubroutineInstruction extends InstructionAbstract {
     @Override
     public void execute(final String data) {
         this.sp.decrement();
-        this.pc.setPc(this.memoryStack.read(this.sp.getSp()));
+        this.pc.set(this.memoryStack.read(this.sp.getSp()));
     }
 }

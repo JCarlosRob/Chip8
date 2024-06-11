@@ -30,8 +30,8 @@ public class CallAddressInstruction extends InstructionAbstract {
     @Override
     public void execute(final String data) {
         this.sp.increase();
-        this.memoryStack.write(this.sp.getSp(), this.pc.getPc());
-        this.pc.setPc(HexFormat.fromHexDigits(data.substring(1)));
+        this.memoryStack.write(this.sp.getSp(), this.pc.get());
+        this.pc.set(HexFormat.fromHexDigits(data.substring(1)));
     }
 
 }

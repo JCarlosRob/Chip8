@@ -1,6 +1,6 @@
 package com.chip8.model.core.instruction;
 
-import com.chip8.api.core.register.VectorRegister;
+import com.chip8.api.core.register.VRegister;
 import com.chip8.model.core.register.ProgramCounterHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +19,7 @@ public class JumpAddressMoreVectorInstructionTest {
     private ProgramCounterHandler pc;
 
     @Mock
-    private VectorRegister vectorXRegister;
+    private VRegister vectorXRegister;
 
     private JumpAddressMoreVectorInstruction jumpAddressMoreVectorInstruction;
 
@@ -60,9 +60,9 @@ public class JumpAddressMoreVectorInstructionTest {
 
     @Test
     void run_test() {
-        Mockito.when(this.vectorXRegister.getVRegister(0)).thenReturn(1);
+        Mockito.when(this.vectorXRegister.get(0)).thenReturn(1);
         this.jumpAddressMoreVectorInstruction.run("BFFE");
-        Mockito.verify(this.pc, Mockito.times(1)).setPc(HexFormat.fromHexDigits("FFF"));
+        Mockito.verify(this.pc, Mockito.times(1)).set(HexFormat.fromHexDigits("FFF"));
     }
 
 }

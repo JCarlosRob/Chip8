@@ -1,6 +1,6 @@
 package com.chip8.model.core.instruction;
 
-import com.chip8.api.core.register.VectorRegister;
+import com.chip8.api.core.register.VRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,10 +11,10 @@ public class AddByteIntoVectorInstruction extends InstructionAbstract {
 
     private static final String COMMAND_REGEX = "^7\\w{3}";
 
-    private final VectorRegister vectorXRegister;
+    private final VRegister vectorXRegister;
 
     @Autowired
-    public AddByteIntoVectorInstruction(final VectorRegister vectorXRegister) {
+    public AddByteIntoVectorInstruction(final VRegister vectorXRegister) {
         super(COMMAND_REGEX);
         this.vectorXRegister = vectorXRegister;
     }
