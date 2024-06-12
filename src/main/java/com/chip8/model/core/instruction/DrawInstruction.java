@@ -33,9 +33,24 @@ public class DrawInstruction extends InstructionAbstract {
 
     @Override
     public void execute(final String opcode) {
-        final Integer[] dataOfMemory = this.memoryRam.read(this.indexRegister.get(), this.indexRegister.get() + HexFormat.fromHexDigits(opcode.substring(3)));
         final Integer vx = this.vRegister.get(HexFormat.fromHexDigits(opcode.substring(1, 2)));
         final Integer vy = this.vRegister.get(HexFormat.fromHexDigits(opcode.substring(2, 3)));
-        IntStream.range(0, dataOfMemory.length).forEach(x -> this.displayBuffer.write((vx + x) & 15, vy, dataOfMemory[x]));
+        final Integer[] dataOfMemory = this.memoryRam.read(this.indexRegister.get(), this.indexRegister.get() + HexFormat.fromHexDigits(opcode.substring(3)));
+
+        this.vRegister.set(15, this.calculateCollision(vx, vy, dataOfMemory) ? 1 : 0);
+        this.calculateDataToBeDisplayed(vx, vy, dataOfMemory);
+    }
+
+    private Boolean calculateCollision(final Integer vx, final Integer vy, final Integer[] dataOfMemory) {
+        return IntStream.range(0, dataOfMemory.length).anyMatch(i -> dataOfMemory[i] == 1 && this.displayBuffer.read((vx + i) & 63, vy) == 1);
+    }
+
+    private void calculateDataToBeDisplayed(final Integer vx, final Integer vy, final Integer[] dataOfMemory) {
+        IntStream.range(0, dataOfMemory.length)
+                .forEach(i -> {
+                    final Integer vxCalculated = (vx + i) & 63;
+                    final Integer dataDisplay = this.displayBuffer.read(vxCalculated, vy);
+                    this.displayBuffer.write(vxCalculated, vy, dataOfMemory[i] ^ dataDisplay);
+                });
     }
 }
