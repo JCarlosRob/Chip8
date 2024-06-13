@@ -1,6 +1,6 @@
 package com.chip8.model.core.instruction;
 
-import com.chip8.api.core.register.DelayTimerRegister;
+import com.chip8.api.core.register.TimerRegister;
 import com.chip8.api.core.register.VRegister;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ class LoadDelayTimerToVInstructionTest {
     private VRegister vRegister;
 
     @Mock
-    private DelayTimerRegister delayTimerRegister;
+    private TimerRegister delayTimerRegister;
 
     @InjectMocks
     private LoadDelayTimerToVInstruction loadDelayTimerToVInstruction;

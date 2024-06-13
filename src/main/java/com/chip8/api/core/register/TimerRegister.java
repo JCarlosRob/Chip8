@@ -1,6 +1,6 @@
 package com.chip8.api.core.register;
 
-public interface DelayTimerRegister {
+public interface TimerRegister {
 
     void set(Integer data);
 

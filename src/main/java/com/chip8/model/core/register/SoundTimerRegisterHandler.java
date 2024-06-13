@@ -4,7 +4,7 @@ import com.chip8.api.core.register.TimerRegister;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DelayTimerRegisterHandler implements TimerRegister {
+public class SoundTimerRegisterHandler implements TimerRegister {
 
     private Integer delayTimer;
 

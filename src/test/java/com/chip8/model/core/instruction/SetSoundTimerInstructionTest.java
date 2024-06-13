@@ -11,52 +11,52 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class SetDelayTimerInstructionTest {
+class SetSoundTimerInstructionTest {
 
     @Mock
     private VRegister vRegister;
 
     @Mock
-    private TimerRegister delayTimerRegister;
+    private TimerRegister soundTimerRegister;
 
     @InjectMocks
-    private SetDelayTimerInstruction setDelayTimerInstruction;
+    private SetSoundTimerInstruction setSoundTimerInstruction;
 
     @Test
     void isExecutable_inputNull_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.setDelayTimerInstruction.isExecutable(null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.setSoundTimerInstruction.isExecutable(null));
     }
 
     @Test
     void isExecutable_inputEmpty_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.setDelayTimerInstruction.isExecutable(""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.setSoundTimerInstruction.isExecutable(""));
     }
 
     @Test
     void isExecutable_inputCommand_returnFalse_test() {
-        Assertions.assertFalse(this.setDelayTimerInstruction.isExecutable("0000"));
+        Assertions.assertFalse(this.setSoundTimerInstruction.isExecutable("0000"));
     }
 
     @Test
     void isExecutable_inputCommand_returnTrue_test() {
-        Assertions.assertTrue(this.setDelayTimerInstruction.isExecutable("FA15"));
+        Assertions.assertTrue(this.setSoundTimerInstruction.isExecutable("FA18"));
     }
 
     @Test
     void run_inputNull_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.setDelayTimerInstruction.run(null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.setSoundTimerInstruction.run(null));
     }
 
     @Test
     void run_inputEmpty_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.setDelayTimerInstruction.run(""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.setSoundTimerInstruction.run(""));
     }
 
     @Test
     void run_test() {
         Mockito.when(this.vRegister.get(10)).thenReturn(1);
-        this.setDelayTimerInstruction.run("FA15");
-        Mockito.verify(this.delayTimerRegister, Mockito.times(1)).set(1);
+        this.setSoundTimerInstruction.run("FA18");
+        Mockito.verify(this.soundTimerRegister, Mockito.times(1)).set(1);
     }
 
 }

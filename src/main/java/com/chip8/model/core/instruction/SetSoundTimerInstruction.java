@@ -9,23 +9,23 @@ import org.springframework.stereotype.Component;
 import java.util.HexFormat;
 
 @Component
-public class SetDelayTimerInstruction extends InstructionAbstract {
+public class SetSoundTimerInstruction extends InstructionAbstract {
 
-    private static final String COMMAND_REGEX = "^F\\w{1}15$";
+    private static final String COMMAND_REGEX = "^F\\w{1}18$";
 
     private final VRegister vRegister;
 
-    private final TimerRegister delayTimerRegister;
+    private final TimerRegister soundTimerRegister;
 
     @Autowired
-    public SetDelayTimerInstruction(final ProgramCounter pc, final VRegister vRegister, final TimerRegister delayTimerRegister) {
+    public SetSoundTimerInstruction(final ProgramCounter pc, final VRegister vRegister, final TimerRegister soundTimerRegister) {
         super(COMMAND_REGEX);
         this.vRegister = vRegister;
-        this.delayTimerRegister = delayTimerRegister;
+        this.soundTimerRegister = soundTimerRegister;
     }
 
     @Override
     public void execute(final String opcode) {
-        this.delayTimerRegister.set(this.vRegister.get(HexFormat.fromHexDigits(opcode.substring(1, 2))));
+        this.soundTimerRegister.set(this.vRegister.get(HexFormat.fromHexDigits(opcode.substring(1, 2))));
     }
 }
