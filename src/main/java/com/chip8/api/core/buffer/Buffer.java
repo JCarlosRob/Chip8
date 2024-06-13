@@ -4,6 +4,8 @@ public interface Buffer {
 
     Integer read(Integer x, Integer y);
 
+    Integer read(Integer x);
+
     void write(Integer x, Integer y, Integer data);
 
     Integer[][] get();

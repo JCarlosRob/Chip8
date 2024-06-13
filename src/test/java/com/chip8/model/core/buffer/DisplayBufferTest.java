@@ -17,9 +17,30 @@ class DisplayBufferTest {
     private DisplayBuffer displayBuffer;
 
     @Test
-    void read_inputCoordinatesAndByte_returnSameByte_test() {
-        this.displayBuffer.write(1, 1, 1);
-        final Integer result = this.displayBuffer.read(1, 1);
+    void read_inputMinCoordinatesAndByte_returnSameByte_test() {
+        this.displayBuffer.write(0, 0, 1);
+        final Integer result = this.displayBuffer.read(0, 0);
+        Assertions.assertEquals(1, result);
+    }
+
+    @Test
+    void read_inputMaxCoordinatesAndByte_returnSameByte_test() {
+        this.displayBuffer.write(63, 31, 1);
+        final Integer result = this.displayBuffer.read(63, 31);
+        Assertions.assertEquals(1, result);
+    }
+
+    @Test
+    void read_inputMinXCoordinateAndByte_returnSameByte_test() {
+        this.displayBuffer.write(0, 0, 1);
+        final Integer result = this.displayBuffer.read(0);
+        Assertions.assertEquals(1, result);
+    }
+
+    @Test
+    void read_inputMaxXCoordinateAndByte_returnSameByte_test() {
+        this.displayBuffer.write(63, 31, 1);
+        final Integer result = this.displayBuffer.read(2047);
         Assertions.assertEquals(1, result);
     }
 
@@ -128,12 +149,16 @@ class DisplayBufferTest {
         final Integer[] rowExpected = {0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0};
         final Integer[][] expected = {rowExpected, rowExpected, rowExpected, rowExpected,
+                rowExpected, rowExpected, rowExpected, rowExpected,
+                rowExpected, rowExpected, rowExpected, rowExpected,
+                rowExpected, rowExpected, rowExpected, rowExpected,
+                rowExpected, rowExpected, rowExpected, rowExpected,
+                rowExpected, rowExpected, rowExpected, rowExpected,
+                rowExpected, rowExpected, rowExpected, rowExpected,
+                rowExpected, rowExpected, rowExpected, rowExpected,
+                rowExpected, rowExpected, rowExpected, rowExpected,
                 rowExpected, rowExpected, rowExpected, rowExpected,
                 rowExpected, rowExpected, rowExpected, rowExpected,
                 rowExpected, rowExpected, rowExpected, rowExpected,

@@ -17,8 +17,8 @@ public class DisplayBuffer implements Buffer {
 
     @PostConstruct
     private void init() {
-        this.display = IntStream.range(0, POSITION_MAX_Y)
-                .mapToObj(r -> IntStream.range(0, POSITION_MAX_X)
+        this.display = IntStream.range(0, POSITION_MAX_X)
+                .mapToObj(r -> IntStream.range(0, POSITION_MAX_Y)
                         .mapToObj(c -> 0)
                         .toArray(Integer[]::new))
                 .toArray(Integer[][]::new);
@@ -33,6 +33,11 @@ public class DisplayBuffer implements Buffer {
         Assert.isTrue(y >= 0, "The Y position can not be negative");
         Assert.isTrue(y < POSITION_MAX_Y, "The Y position can not be greater than " + POSITION_MAX_Y);
         return this.display[x][y];
+    }
+
+    @Override
+    public Integer read(final Integer x) {
+        return this.read(x % POSITION_MAX_X, x / POSITION_MAX_X);
     }
 
     @Override
