@@ -14,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.HexFormat;
 
 @ExtendWith(MockitoExtension.class)
-class SkipNextIsKeyPressedInstructionTest {
+class SkipNextIsPressedKeyInstructionTest {
 
     @Mock
     private ProgramCounter pc;
@@ -26,43 +26,43 @@ class SkipNextIsKeyPressedInstructionTest {
     private Keyboard keyboard;
 
     @InjectMocks
-    private SkipNextIsKeyPressedInstruction skipNextIsKeyPressedInstruction;
+    private SkipNextIsPressedKeyInstruction skipNextIsPressedKeyInstruction;
 
     @Test
     void isExecutable_inputNull_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.skipNextIsKeyPressedInstruction.isExecutable(null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.skipNextIsPressedKeyInstruction.isExecutable(null));
     }
 
     @Test
     void isExecutable_inputEmpty_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.skipNextIsKeyPressedInstruction.isExecutable(""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.skipNextIsPressedKeyInstruction.isExecutable(""));
     }
 
     @Test
     void isExecutable_inputCommand_returnFalse_test() {
-        Assertions.assertFalse(this.skipNextIsKeyPressedInstruction.isExecutable("0000"));
+        Assertions.assertFalse(this.skipNextIsPressedKeyInstruction.isExecutable("0000"));
     }
 
     @Test
     void isExecutable_inputCommand_returnTrue_test() {
-        Assertions.assertTrue(this.skipNextIsKeyPressedInstruction.isExecutable("EA9E"));
+        Assertions.assertTrue(this.skipNextIsPressedKeyInstruction.isExecutable("EA9E"));
     }
 
     @Test
     void run_inputNull_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.skipNextIsKeyPressedInstruction.run(null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.skipNextIsPressedKeyInstruction.run(null));
     }
 
     @Test
     void run_inputEmpty_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.skipNextIsKeyPressedInstruction.run(""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.skipNextIsPressedKeyInstruction.run(""));
     }
 
     @Test
     void run_thePressedKeyIsEquals_invokeNext_test() {
         Mockito.when(this.vRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(10);
         Mockito.when(this.keyboard.read()).thenReturn("A");
-        this.skipNextIsKeyPressedInstruction.run("EA9E");
+        this.skipNextIsPressedKeyInstruction.run("EA9E");
         Mockito.verify(this.pc, Mockito.times(1)).next(2);
     }
 
@@ -70,7 +70,7 @@ class SkipNextIsKeyPressedInstructionTest {
     void run_thePressedKeyIsNotEquals_notInvokeNext_test() {
         Mockito.when(this.vRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(10);
         Mockito.when(this.keyboard.read()).thenReturn("B");
-        this.skipNextIsKeyPressedInstruction.run("EA93");
+        this.skipNextIsPressedKeyInstruction.run("EA93");
         Mockito.verifyNoInteractions(this.pc);
     }
 

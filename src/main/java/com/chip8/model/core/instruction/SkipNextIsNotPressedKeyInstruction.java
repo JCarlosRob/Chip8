@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 import java.util.HexFormat;
 
 @Component
-public class SkipNextIsKeyPressedInstruction extends InstructionAbstract {
+public class SkipNextIsNotPressedKeyInstruction extends InstructionAbstract {
 
-    private static final String COMMAND_REGEX = "^E\\w{1}9E$";
+    private static final String COMMAND_REGEX = "^E\\w{1}A1$";
 
     private final ProgramCounter pc;
 
@@ -20,7 +20,7 @@ public class SkipNextIsKeyPressedInstruction extends InstructionAbstract {
     private final Keyboard keyboard;
 
     @Autowired
-    public SkipNextIsKeyPressedInstruction(final ProgramCounter pc, final VRegister vRegister, final Keyboard keyboard) {
+    public SkipNextIsNotPressedKeyInstruction(final ProgramCounter pc, final VRegister vRegister, final Keyboard keyboard) {
         super(COMMAND_REGEX);
         this.pc = pc;
         this.vRegister = vRegister;
@@ -32,7 +32,7 @@ public class SkipNextIsKeyPressedInstruction extends InstructionAbstract {
         final Integer data = this.vRegister.get(HexFormat.fromHexDigits(opcode.substring(1, 2)));
         final String dataHex = HexFormat.of().toHexDigits(data).substring(7);
         final String keyPressed = this.keyboard.read();
-        if (dataHex.equalsIgnoreCase(keyPressed)) {
+        if (!dataHex.equalsIgnoreCase(keyPressed)) {
             this.pc.next(2);
         }
     }
