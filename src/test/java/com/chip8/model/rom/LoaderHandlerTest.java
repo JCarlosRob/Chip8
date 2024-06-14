@@ -1,25 +1,30 @@
-package com.chip8.model.loader;
+package com.chip8.model.rom;
 
+import com.chip8.api.rom.Rom;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.IOException;
 
-class LoaderRomHandlerTest {
+@ExtendWith(MockitoExtension.class)
+class LoaderHandlerTest {
 
-    private LoaderRomHandler loaderRomHandler;
+    @Mock
+    private Rom rom;
 
-    @BeforeEach
-    void setUp() {
-        this.loaderRomHandler = new LoaderRomHandler();
-    }
+    @InjectMocks
+    private LoaderHandler loaderRomHandler;
 
     @Test
     void load_test() throws IOException {
-        final Byte[] result = this.loaderRomHandler.load("src/test/resources/roms/testFile");
+        this.loaderRomHandler.load("src/test/resources/roms/testFile");
         final Byte[] expected = {116, 101, 115, 116};
-        Assertions.assertArrayEquals(expected, result);
+        Mockito.verify(this.rom, Mockito.times(1)).set(expected);
     }
 
     @Test
