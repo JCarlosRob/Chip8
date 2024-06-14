@@ -3,7 +3,7 @@ package com.chip8.model.core.register;
 import com.chip8.api.core.register.TimerRegister;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("delayTimerRegister")
 public class DelayTimerRegisterHandler implements TimerRegister {
 
     private Integer delayTimer;

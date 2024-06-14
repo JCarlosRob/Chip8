@@ -21,6 +21,11 @@ public class MemoryStack implements Memory {
     }
 
     @Override
+    public void write(final Integer position, final Integer[] data) {
+
+    }
+
+    @Override
     public Integer read(final Integer position) {
         Assert.notNull(position, "The position can not be null");
         Assert.isTrue(position >= 0, "The position can not be negative");

@@ -30,7 +30,7 @@ public class SkipNextIsNotEqualsByteInstruction extends InstructionAbstract {
         final Integer kk = HexFormat.fromHexDigits(data.substring(2));
 
         if (!Objects.equals(this.vRegister.get(vx), kk)) {
-            this.pc.next(2);
+            this.pc.next(4);
         }
     }
 }

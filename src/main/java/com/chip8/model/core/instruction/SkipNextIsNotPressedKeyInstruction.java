@@ -33,7 +33,7 @@ public class SkipNextIsNotPressedKeyInstruction extends InstructionAbstract {
         final String dataHex = HexFormat.of().toHexDigits(data).substring(7);
         final String keyPressed = this.keyboard.read();
         if (!dataHex.equalsIgnoreCase(keyPressed)) {
-            this.pc.next(2);
+            this.pc.next(4);
         }
     }
 }

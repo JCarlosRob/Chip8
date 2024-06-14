@@ -4,14 +4,23 @@ import com.chip8.api.core.memory.Memory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+import javax.annotation.PostConstruct;
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 @Component
 public class MemoryRam implements Memory {
 
     private static final Integer MEMORY_SIZE = 4094;
 
-    private final Integer[] memory = new Integer[MEMORY_SIZE];
+    private Integer[] memory = new Integer[MEMORY_SIZE];
+
+    @PostConstruct
+    private void init() {
+        this.memory = IntStream.range(0, MEMORY_SIZE)
+                .mapToObj(c -> 0)
+                .toArray(Integer[]::new);
+    }
 
     @Override
     public Integer read(final Integer position) {
@@ -38,6 +47,11 @@ public class MemoryRam implements Memory {
         Assert.isTrue(position >= 0, "The position can not be negative");
         Assert.isTrue(position < MEMORY_SIZE, "The position can not greater than " + MEMORY_SIZE);
         this.memory[position] = data;
+    }
+
+    @Override
+    public void write(final Integer position, final Integer[] data) {
+        IntStream.range(position, data.length + position).forEach(i -> this.write(i, data[i - position]));
     }
 
 }

@@ -12,4 +12,5 @@ public class AppConfigure {
     public Random random() {
         return new Random();
     }
+
 }
