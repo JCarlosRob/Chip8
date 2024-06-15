@@ -4,12 +4,22 @@ import com.chip8.api.core.memory.Memory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+import javax.annotation.PostConstruct;
+import java.util.stream.IntStream;
+
 @Component
 public class MemoryStack implements Memory {
 
     private static final Integer MEMORY_SIZE = 20;
 
-    private final Integer[] memory = new Integer[MEMORY_SIZE];
+    private Integer[] memory = new Integer[MEMORY_SIZE];
+
+    @PostConstruct
+    private void init() {
+        this.memory = IntStream.range(0, MEMORY_SIZE)
+                .mapToObj(c -> 0)
+                .toArray(Integer[]::new);
+    }
 
     @Override
     public void write(final Integer position, final Integer data) {

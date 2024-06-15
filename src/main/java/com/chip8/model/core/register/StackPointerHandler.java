@@ -8,7 +8,7 @@ import java.util.Objects;
 @Component
 public class StackPointerHandler implements StackPointer {
 
-    private Integer sp;
+    private Integer sp = 0;
 
     @Override
     public void decrement() {
