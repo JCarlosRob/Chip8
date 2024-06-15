@@ -7,7 +7,7 @@ import org.springframework.util.Assert;
 @Component
 public class ProgramCounterHandler implements ProgramCounter {
 
-    private Integer pc = 200;
+    private Integer pc = 512;
 
     @Override
     public Integer get() {

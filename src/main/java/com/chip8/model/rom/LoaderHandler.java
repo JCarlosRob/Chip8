@@ -39,7 +39,7 @@ public class LoaderHandler implements Loader {
                 .map(HexFormat::fromHexDigits)
                 .toArray(Integer[]::new);
 
-        this.memoryRam.write(200, rom);
+        this.memoryRam.write(512, rom);
     }
 
 }

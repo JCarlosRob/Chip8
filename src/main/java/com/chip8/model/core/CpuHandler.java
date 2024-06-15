@@ -1,9 +1,11 @@
 package com.chip8.model.core;
 
 import com.chip8.api.core.Cpu;
+import com.chip8.api.core.buffer.Buffer;
 import com.chip8.api.core.instruction.Instruction;
 import com.chip8.api.core.memory.Memory;
 import com.chip8.api.core.register.ProgramCounter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -21,6 +23,9 @@ public class CpuHandler implements Cpu {
 
     private final Memory memoryRam;
 
+    @Autowired
+    private Buffer displayBuffer;
+
     public CpuHandler(final List<Instruction> instructions, final ProgramCounter pc, final Memory memoryRam) {
         this.instructions = instructions;
         this.pc = pc;
@@ -34,6 +39,11 @@ public class CpuHandler implements Cpu {
             this.instructions.stream().filter(instruction -> instruction.isExecutable(opcode))
                     .findFirst()
                     .ifPresent(instruction -> instruction.run(opcode));
+
+
+            Arrays.stream(this.displayBuffer.get()).forEach(integers -> System.out.println(Arrays.toString(integers)));
+            System.out.println();
+            System.out.println();
             Thread.sleep(16);
         }
     }

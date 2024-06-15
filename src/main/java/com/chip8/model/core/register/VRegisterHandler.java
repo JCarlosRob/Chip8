@@ -4,12 +4,22 @@ import com.chip8.api.core.register.VRegister;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+import javax.annotation.PostConstruct;
+import java.util.stream.IntStream;
+
 @Component
 public class VRegisterHandler implements VRegister {
 
     private static final Integer MAX_LENGTH_V_REGISTER = 16;
 
-    private final Integer[] v = new Integer[MAX_LENGTH_V_REGISTER];
+    private Integer[] v = new Integer[MAX_LENGTH_V_REGISTER];
+
+    @PostConstruct
+    private void init() {
+        this.v = IntStream.range(0, MAX_LENGTH_V_REGISTER)
+                .mapToObj(c -> 0)
+                .toArray(Integer[]::new);
+    }
 
     @Override
     public void set(final Integer position, final Integer data) {

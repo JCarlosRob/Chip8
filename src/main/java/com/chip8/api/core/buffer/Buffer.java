@@ -8,6 +8,8 @@ public interface Buffer {
 
     void write(Integer x, Integer y, Integer data);
 
+    void write(Integer x, Integer y, Integer[] data);
+
     Integer[][] get();
 
     void reset();
