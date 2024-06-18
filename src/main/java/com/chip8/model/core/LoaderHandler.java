@@ -1,8 +1,9 @@
-package com.chip8.model.rom;
+package com.chip8.model.core;
 
+import com.chip8.api.core.Loader;
 import com.chip8.api.core.memory.Memory;
-import com.chip8.api.rom.Loader;
 import com.chip8.api.rom.Rom;
+import com.chip8.model.core.sprite.SpritesEnum;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HexFormat;
 import java.util.stream.IntStream;
 
@@ -27,7 +29,7 @@ public class LoaderHandler implements Loader {
     }
 
     @Override
-    public void load(final String path) throws IOException {
+    public void pathRom(final String path) throws IOException {
         Assert.isTrue(StringUtils.hasLength(path), "The path can not be null or empty");
         final Path pathRom = Paths.get(path);
         final byte[] romBytes = Files.readAllBytes(pathRom);
@@ -40,6 +42,11 @@ public class LoaderHandler implements Loader {
                 .toArray(Integer[]::new);
 
         this.memoryRam.write(512, rom);
+    }
+
+    @Override
+    public void loadSprites() {
+        Arrays.stream(SpritesEnum.values()).forEach(spritesEnum -> this.memoryRam.write(spritesEnum.getPositionInMemory(), spritesEnum.getSprite()));
     }
 
 }

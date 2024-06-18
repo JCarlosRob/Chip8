@@ -4,6 +4,7 @@ import com.chip8.api.core.buffer.Buffer;
 import com.chip8.api.core.register.IndexRegister;
 import com.chip8.api.core.register.ProgramCounter;
 import com.chip8.api.core.register.VRegister;
+import com.chip8.model.core.sprite.SpritesEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +33,6 @@ public class SetILocationOfSpriteInstruction extends InstructionAbstract {
     @Override
     public void execute(final String opcode) {
         final Integer vData = this.vRegister.get(HexFormat.fromHexDigits(opcode.substring(1, 2)));
-        this.indexRegister.set(this.displayBuffer.read(vData));
+        SpritesEnum.findByRepresentation(vData).ifPresent(spritesEnum -> this.indexRegister.set(spritesEnum.getPositionInMemory()));
     }
 }

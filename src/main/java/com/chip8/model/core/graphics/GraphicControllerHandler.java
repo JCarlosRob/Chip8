@@ -6,6 +6,7 @@ import com.chip8.api.core.register.VRegister;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Component
@@ -32,7 +33,7 @@ public class GraphicControllerHandler implements GraphicController {
     }
 
     private String[] calculateSpriteToBeDisplayed(final Integer[] data) {
-        return Arrays.stream(data).map(Integer::toBinaryString).toArray(String[]::new);
+        return Arrays.stream(data).map(Integer::toBinaryString).map(this::spriteSectionNormalizer).toArray(String[]::new);
     }
 
     private void loadSprite(final Integer x, final Integer y, final String[] sprite) {
@@ -50,6 +51,11 @@ public class GraphicControllerHandler implements GraphicController {
         });
 
 
+    }
+
+    private String spriteSectionNormalizer(final String spriteSection) {
+        final String zeros = IntStream.range(0, 8 - spriteSection.length()).mapToObj(value -> "0").collect(Collectors.joining());
+        return zeros + spriteSection;
     }
 
 }

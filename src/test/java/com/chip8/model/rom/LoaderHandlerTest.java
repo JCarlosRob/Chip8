@@ -1,6 +1,7 @@
 package com.chip8.model.rom;
 
 import com.chip8.api.rom.Rom;
+import com.chip8.model.core.LoaderHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,25 +22,25 @@ class LoaderHandlerTest {
     private LoaderHandler loaderRomHandler;
 
     @Test
-    void load_test() throws IOException {
-        this.loaderRomHandler.load("src/test/resources/roms/testFile");
+    void pathRom_test() throws IOException {
+        this.loaderRomHandler.pathRom("src/test/resources/roms/testFile");
         final Byte[] expected = {116, 101, 115, 116};
         Mockito.verify(this.rom, Mockito.times(1)).set(expected);
     }
 
     @Test
-    void load_inputNull_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.loaderRomHandler.load(null));
+    void pathRom_inputNull_returnException_test() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.loaderRomHandler.pathRom(null));
     }
 
     @Test
-    void load_inputEmpty_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.loaderRomHandler.load(""));
+    void pathRom_inputEmpty_returnException_test() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.loaderRomHandler.pathRom(""));
     }
 
     @Test
-    void load_inputPathNotExist_returnException_test() {
-        Assertions.assertThrows(IOException.class, () -> this.loaderRomHandler.load("/"));
+    void pathRom_inputPathNotExist_returnException_test() {
+        Assertions.assertThrows(IOException.class, () -> this.loaderRomHandler.pathRom("/"));
     }
 
 }

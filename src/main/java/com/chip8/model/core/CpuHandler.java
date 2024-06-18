@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.HexFormat;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Component
 public class CpuHandler implements Cpu {
@@ -41,7 +42,13 @@ public class CpuHandler implements Cpu {
                     .ifPresent(instruction -> instruction.run(opcode));
 
 
-            Arrays.stream(this.displayBuffer.get()).forEach(integers -> System.out.println(Arrays.toString(integers)));
+            IntStream.range(0, this.displayBuffer.get()[0].length).forEach(y -> {
+                IntStream.range(0, this.displayBuffer.get().length).forEach(x ->
+                        System.out.print(String.valueOf(this.displayBuffer.get()[x][y]).replace("0", " ")));
+                System.out.println();
+            });
+
+//            Arrays.stream(this.displayBuffer.get()).forEach(integers -> System.out.println(Arrays.toString(integers)));
             System.out.println();
             System.out.println();
             Thread.sleep(16);
