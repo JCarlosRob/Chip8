@@ -65,7 +65,7 @@ class SkipNextIsEqualsVectorInstructionTest {
 
         this.skipNextIsEqualsVectorInstruction.run("5AFF");
 
-        Mockito.verify(this.pc, Mockito.times(1)).next(2);
+        Mockito.verify(this.pc, Mockito.times(1)).next(4);
     }
 
     @Test

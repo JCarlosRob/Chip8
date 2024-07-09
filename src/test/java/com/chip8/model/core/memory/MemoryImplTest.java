@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-class MemoryRamTest {
+class MemoryImplTest {
 
-    private MemoryRam memoryRam;
+    private MemoryImpl memoryRam;
 
     @BeforeEach
     void setUp() {
-        this.memoryRam = new MemoryRam();
+        this.memoryRam = new MemoryImpl(4094);
     }
 
     @Test
@@ -61,12 +61,12 @@ class MemoryRamTest {
 
     @Test
     void write_inputDataNull_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.write(1, null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.write(1, (Integer) null));
     }
 
     @Test
     void write_inputPositionAndDataNull_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.write(1, null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.write(1, (Integer) null));
     }
 
     @Test

@@ -63,7 +63,7 @@ class SkipNextIsNotEqualsVectorInstructionTest {
         Mockito.when(this.vRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(254);
         Mockito.when(this.vRegister.get(HexFormat.fromHexDigits("F"))).thenReturn(253);
         this.skipNextIsNotEqualsVectorInstruction.run("9AF0");
-        Mockito.verify(this.pc, Mockito.times(1)).next(2);
+        Mockito.verify(this.pc, Mockito.times(1)).next(4);
     }
 
     @Test

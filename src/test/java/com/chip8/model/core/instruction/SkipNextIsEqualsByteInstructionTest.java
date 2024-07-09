@@ -60,7 +60,7 @@ class SkipNextIsEqualsByteInstructionTest {
 
         this.skipNextIsEqualsByteInstruction.run("3AFF");
 
-        Mockito.verify(this.pc, Mockito.times(1)).next(2);
+        Mockito.verify(this.pc, Mockito.times(1)).next(4);
     }
 
     @Test

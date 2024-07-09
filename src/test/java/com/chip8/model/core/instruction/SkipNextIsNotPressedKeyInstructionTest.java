@@ -71,7 +71,7 @@ class SkipNextIsNotPressedKeyInstructionTest {
         Mockito.when(this.vRegister.get(HexFormat.fromHexDigits("A"))).thenReturn(10);
         Mockito.when(this.keyboard.read()).thenReturn("B");
         this.skipNextIsNotPressedKeyInstruction.run("EA93");
-        Mockito.verify(this.pc, Mockito.times(1)).next(2);
+        Mockito.verify(this.pc, Mockito.times(1)).next(4);
     }
 
 }

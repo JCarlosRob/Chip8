@@ -37,13 +37,13 @@ class ProgramCounterHandlerTest {
     @Test
     void next_returnIncreaseBy1_test() {
         this.programCounterHandler.next();
-        Assertions.assertEquals(1, this.programCounterHandler.get());
+        Assertions.assertEquals(514, this.programCounterHandler.get());
     }
 
     @Test
     void next_input2Times_returnIncreaseBy2_test() {
         this.programCounterHandler.next(2);
-        Assertions.assertEquals(2, this.programCounterHandler.get());
+        Assertions.assertEquals(514, this.programCounterHandler.get());
     }
 
     @Test

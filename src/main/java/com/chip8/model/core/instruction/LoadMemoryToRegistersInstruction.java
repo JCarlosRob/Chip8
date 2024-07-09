@@ -1,8 +1,8 @@
 package com.chip8.model.core.instruction;
 
+import com.chip8.api.core.memory.Memory;
 import com.chip8.api.core.register.IndexRegister;
 import com.chip8.api.core.register.VRegister;
-import com.chip8.model.core.memory.MemoryRam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,10 +18,10 @@ public class LoadMemoryToRegistersInstruction extends InstructionAbstract {
 
     private final IndexRegister indexRegister;
 
-    private final MemoryRam memoryRam;
+    private final Memory memoryRam;
 
     @Autowired
-    public LoadMemoryToRegistersInstruction(final VRegister vRegister, final IndexRegister indexRegister, final MemoryRam memoryRam) {
+    public LoadMemoryToRegistersInstruction(final VRegister vRegister, final IndexRegister indexRegister, final Memory memoryRam) {
         super(COMMAND_REGEX);
         this.vRegister = vRegister;
         this.indexRegister = indexRegister;

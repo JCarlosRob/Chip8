@@ -1,8 +1,8 @@
 package com.chip8.model.core.instruction;
 
+import com.chip8.api.core.memory.Memory;
 import com.chip8.api.core.register.IndexRegister;
 import com.chip8.api.core.register.VRegister;
-import com.chip8.model.core.memory.MemoryRam;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class StoreRegistersInstructionTest {
+class StoreRegistersInstructionTest {
 
     @Mock
     private VRegister vRegister;
@@ -21,7 +21,7 @@ public class StoreRegistersInstructionTest {
     private IndexRegister indexRegister;
 
     @Mock
-    private MemoryRam memoryRam;
+    private Memory memoryRam;
 
     @InjectMocks
     private StoreRegistersInstruction storeRegistersInstruction;

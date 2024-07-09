@@ -1,23 +1,21 @@
 package com.chip8.model.core.memory;
 
 import com.chip8.api.core.memory.Memory;
-import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
-@Component
-public class MemoryRam implements Memory {
+public class MemoryImpl implements Memory {
 
-    private static final Integer MEMORY_SIZE = 4094;
+    private final Integer memorySize;
 
-    private Integer[] memory = new Integer[MEMORY_SIZE];
+    private final Integer[] memory;
 
-    @PostConstruct
-    private void init() {
-        this.memory = IntStream.range(0, MEMORY_SIZE)
+    public MemoryImpl(final Integer memorySize) {
+        this.memorySize = memorySize;
+
+        this.memory = IntStream.range(0, this.memorySize)
                 .mapToObj(c -> 0)
                 .toArray(Integer[]::new);
     }
@@ -26,7 +24,7 @@ public class MemoryRam implements Memory {
     public Integer read(final Integer position) {
         Assert.notNull(position, "The position can not be null");
         Assert.isTrue(position >= 0, "The position can not be negative");
-        Assert.isTrue(position < MEMORY_SIZE, "The position can not greater than " + MEMORY_SIZE);
+        Assert.isTrue(position < this.memorySize, "The position can not greater than " + this.memorySize);
         return this.memory[position];
     }
 
@@ -45,7 +43,7 @@ public class MemoryRam implements Memory {
         Assert.notNull(position, "The position can not be null");
         Assert.notNull(data, "The data can not be null");
         Assert.isTrue(position >= 0, "The position can not be negative");
-        Assert.isTrue(position < MEMORY_SIZE, "The position can not greater than " + MEMORY_SIZE);
+        Assert.isTrue(position < this.memorySize, "The position can not greater than " + this.memorySize);
         this.memory[position] = data;
     }
 
