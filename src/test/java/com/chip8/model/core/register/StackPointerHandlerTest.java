@@ -14,13 +14,6 @@ class StackPointerHandlerTest {
     }
 
     @Test
-    void decrement_stackPointerIsZero_resultNoDecrement_test() {
-        this.stackPointerHandler.set(0);
-        this.stackPointerHandler.decrement();
-        Assertions.assertEquals((short) 0, this.stackPointerHandler.get());
-    }
-
-    @Test
     void decrement_stackPointerGreaterThanZero_resultDecrement_test() {
         this.stackPointerHandler.set(1);
         this.stackPointerHandler.decrement();
@@ -28,10 +21,8 @@ class StackPointerHandlerTest {
     }
 
     @Test
-    void increase_stackPointerIsZero_resultNoDecrement_test() {
-        this.stackPointerHandler.set(11);
-        this.stackPointerHandler.increase();
-        Assertions.assertEquals((short) 11, this.stackPointerHandler.get());
+    void decrement_stackPointerIsZero_resultException_test() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.stackPointerHandler.decrement());
     }
 
     @Test
@@ -39,6 +30,17 @@ class StackPointerHandlerTest {
         this.stackPointerHandler.set(10);
         this.stackPointerHandler.increase();
         Assertions.assertEquals((short) 11, this.stackPointerHandler.get());
+    }
+
+    @Test
+    void increase_stackPointerIsEleven_resultException_test() {
+        this.stackPointerHandler.set(11);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.stackPointerHandler.increase());
+    }
+
+    @Test
+    void set_inputDataNull_resultException_test() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.stackPointerHandler.set(null));
     }
 
 }

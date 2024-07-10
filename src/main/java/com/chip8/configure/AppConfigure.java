@@ -1,7 +1,9 @@
 package com.chip8.configure;
 
 import com.chip8.api.core.memory.Memory;
+import com.chip8.api.core.register.TimerRegister;
 import com.chip8.model.core.memory.MemoryImpl;
+import com.chip8.model.core.register.TimerRegisterHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,6 +25,16 @@ public class AppConfigure {
     @Bean
     public Memory memoryStack() {
         return new MemoryImpl(20);
+    }
+
+    @Bean
+    public TimerRegister soundTimerRegister() {
+        return new TimerRegisterHandler();
+    }
+
+    @Bean
+    public TimerRegister delayTimerRegister() {
+        return new TimerRegisterHandler();
     }
 
 }

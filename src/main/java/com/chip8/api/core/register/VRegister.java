@@ -8,4 +8,6 @@ public interface VRegister {
 
     void add(Integer position, Integer data);
 
+    void reset();
+
 }

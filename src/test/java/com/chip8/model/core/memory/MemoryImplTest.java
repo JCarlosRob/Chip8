@@ -70,6 +70,29 @@ class MemoryImplTest {
     }
 
     @Test
+    void writeArrayData_inputData_test() {
+        this.memoryRam.write(1, new Integer[]{2, 3});
+        Assertions.assertEquals(2, this.memoryRam.read(1));
+        Assertions.assertEquals(3, this.memoryRam.read(2));
+
+    }
+
+    @Test
+    void writeArrayData_inputNullData_test() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.write(1, (Integer[]) null));
+    }
+
+    @Test
+    void writeArrayData_inputNullPosition_test() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.write(null, new Integer[]{2, 3}));
+    }
+
+    @Test
+    void writeArrayData_inputNegativePosition_test() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.write(-1, new Integer[]{2, 3}));
+    }
+
+    @Test
     void read_inputStartPositionNull_returnException_test() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.read(null, 0));
     }
@@ -87,6 +110,11 @@ class MemoryImplTest {
     @Test
     void read_inputStartPositionNegative_returnException_test() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.read(-1, 1));
+    }
+
+    @Test
+    void read_inputStartPositionIsGreaterThanEndPosition_returnException_test() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.memoryRam.read(2, 1));
     }
 
     @Test

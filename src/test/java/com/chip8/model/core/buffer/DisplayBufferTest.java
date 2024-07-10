@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -19,7 +18,7 @@ class DisplayBufferTest {
     private DisplayBuffer displayBuffer;
 
     @BeforeEach
-    public void beforeEach(final ApplicationContext applicationContext) {
+    public void beforeEach() {
         this.displayBuffer.reset();
     }
 
@@ -52,6 +51,13 @@ class DisplayBufferTest {
     }
 
     @Test
+    void writeArrayData_inputMaxXCoordinateAndByte_returnSameByte_test() {
+        this.displayBuffer.write(0, 0, new Integer[]{1, 2});
+        Assertions.assertEquals(1, this.displayBuffer.read(0));
+        Assertions.assertEquals(2, this.displayBuffer.read(1));
+    }
+
+    @Test
     void read_inputXCoordinateNull_returnException_test() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> this.displayBuffer.read(null, 1));
     }
@@ -79,25 +85,6 @@ class DisplayBufferTest {
     @Test
     void read_inputAllCoordinatesNegative_returnException_test() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> this.displayBuffer.read(-1, -1));
-    }
-
-    @Test
-    void read_inputXCoordinateGraterThan63_returnException_test() {
-        this.displayBuffer.write(64, 0, 1);
-        final Integer result = this.displayBuffer.read(0, 0);
-        Assertions.assertEquals(1, result);
-    }
-
-    @Test
-    void read_inputYCoordinateGraterThan31_returnException_test() {
-        this.displayBuffer.write(0, 32, 1);
-        Assertions.assertEquals(1, this.displayBuffer.read(0, 32));
-    }
-
-    @Test
-    void read_inputXCoordinateGraterThan63AndYCoordinateGraterThan31_returnException_test() {
-        this.displayBuffer.write(0, 0, 1);
-        Assertions.assertEquals(1, this.displayBuffer.read(64, 32));
     }
 
     @Test
@@ -132,33 +119,12 @@ class DisplayBufferTest {
 
     @Test
     void write_inputYCoordinateNegative_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.displayBuffer.read(0, -1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.displayBuffer.write(0, -1, 1));
     }
 
     @Test
-    void write_inputAllCoordinatesNegative_returnException_test() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> this.displayBuffer.read(-1, -1));
-    }
-
-    @Test
-    void write_inputXCoordinateGraterThan63_returnException_test() {
-        this.displayBuffer.write(64, 0, 1);
-        final Integer result = this.displayBuffer.read(0, 0);
-        Assertions.assertEquals(1, result);
-    }
-
-    @Test
-    void write_inputYCoordinateGraterThan31_returnException_test() {
-        this.displayBuffer.write(0, 32, 1);
-        final Integer result = this.displayBuffer.read(0, 0);
-        Assertions.assertEquals(1, result);
-    }
-
-    @Test
-    void write_inputXCoordinateGraterThan63AndYCoordinateGraterThan31_returnException_test() {
-        this.displayBuffer.write(64, 32, 1);
-        final Integer result = this.displayBuffer.read(0, 0);
-        Assertions.assertEquals(1, result);
+    void writeArrayData_inputDataNull_returnException_test() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> this.displayBuffer.write(0, 0, (Integer[]) null));
     }
 
     @Test

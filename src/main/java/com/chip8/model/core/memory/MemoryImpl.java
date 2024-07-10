@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.stream.IntStream;
 
 public class MemoryImpl implements Memory {
-
     private final Integer memorySize;
 
     private final Integer[] memory;
@@ -49,6 +48,9 @@ public class MemoryImpl implements Memory {
 
     @Override
     public void write(final Integer position, final Integer[] data) {
+        Assert.notNull(data, "The data can not be null");
+        Assert.notNull(position, "The position can not be null");
+        Assert.isTrue(position >= 0, "The position can not be negative");
         IntStream.range(position, data.length + position).forEach(i -> this.write(i, data[i - position]));
     }
 

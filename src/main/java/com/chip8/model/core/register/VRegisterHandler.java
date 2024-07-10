@@ -39,7 +39,12 @@ public class VRegisterHandler implements VRegister {
 
     @Override
     public void add(final Integer position, final Integer data) {
-        this.v[position] = this.v[position] + data;
+        this.set(position, this.get(position) + data);
+    }
+
+    @Override
+    public void reset() {
+        this.init();
     }
 
 }

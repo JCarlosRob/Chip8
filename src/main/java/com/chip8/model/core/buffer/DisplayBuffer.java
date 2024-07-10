@@ -11,6 +11,7 @@ import java.util.stream.IntStream;
 public class DisplayBuffer implements Buffer {
 
     private static final Integer POSITION_MAX_X = 64;
+
     private static final Integer POSITION_MAX_Y = 32;
 
     private Integer[][] display;
@@ -50,9 +51,8 @@ public class DisplayBuffer implements Buffer {
 
     @Override
     public void write(final Integer x, final Integer y, final Integer[] data) {
-        IntStream.range(0, data.length).forEach(i -> {
-            this.write((x + i) % POSITION_MAX_X, y % POSITION_MAX_Y, data[i]);
-        });
+        Assert.notNull(data, "The data parameter can not be null");
+        IntStream.range(0, data.length).forEach(i -> this.write((x + i) % POSITION_MAX_X, y % POSITION_MAX_Y, data[i]));
     }
 
     @Override
