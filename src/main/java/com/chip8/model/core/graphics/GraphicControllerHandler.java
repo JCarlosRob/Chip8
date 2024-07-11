@@ -4,6 +4,7 @@ import com.chip8.api.core.buffer.Buffer;
 import com.chip8.api.core.graphics.GraphicController;
 import com.chip8.api.core.register.VRegister;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -23,13 +24,17 @@ public class GraphicControllerHandler implements GraphicController {
 
     @Override
     public void display(final Integer x, final Integer y, final Integer[] data) {
+        Assert.notNull(x, "The x position can not be null");
+        Assert.notNull(y, "The y position can not be null");
+        Assert.notNull(data, "The data position can not be null");
+
+        this.restoreCollision();
         final String[] sprite = this.calculateSpriteToBeDisplayed(data);
         this.loadSprite(x, y, sprite);
     }
 
-    private Boolean calculateCollision(final Integer vx, final Integer vy, final Integer[] dataOfMemory) {
-        //TODO
-        return false;
+    private void restoreCollision() {
+        this.vRegister.set(15, 0);
     }
 
     private String[] calculateSpriteToBeDisplayed(final Integer[] data) {
@@ -44,9 +49,16 @@ public class GraphicControllerHandler implements GraphicController {
                 });
     }
 
+    private void calculateCollision(final Integer byteSprite, final Integer byteDisplay) {
+        if (this.vRegister.get(15) == 0 && byteSprite == 1 && byteDisplay == 1) {
+            this.vRegister.set(15, 1);
+        }
+    }
+
     private void loadSpriteSection(final Integer x, final Integer y, final Integer[] spriteSection) {
         IntStream.range(0, spriteSection.length).forEach(i -> {
             final Integer displayValue = this.displayBuffer.read(x + i, y);
+            this.calculateCollision(displayValue, displayValue);
             this.displayBuffer.write(x + i, y, spriteSection[i] ^ displayValue);
         });
 
