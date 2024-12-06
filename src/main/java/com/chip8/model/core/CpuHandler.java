@@ -4,7 +4,10 @@ import com.chip8.api.core.Cpu;
 import com.chip8.api.core.buffer.Buffer;
 import com.chip8.api.core.instruction.Instruction;
 import com.chip8.api.core.memory.Memory;
+import com.chip8.api.core.register.IndexRegister;
 import com.chip8.api.core.register.ProgramCounter;
+import com.chip8.api.core.register.TimerRegister;
+import com.chip8.api.core.register.VRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +30,15 @@ public class CpuHandler implements Cpu {
     @Autowired
     private Buffer displayBuffer;
 
+    @Autowired
+    private IndexRegister indexRegister;
+
+    @Autowired
+    private VRegister vRegister;
+
+    @Autowired
+    private TimerRegister delayTimerRegister;
+
     public CpuHandler(final List<Instruction> instructions, final ProgramCounter pc, final Memory memoryRam) {
         this.instructions = instructions;
         this.pc = pc;
@@ -41,17 +53,11 @@ public class CpuHandler implements Cpu {
                     .findFirst()
                     .ifPresent(instruction -> instruction.run(opcode));
 
+            if (this.delayTimerRegister.get() > 0) {
+                this.delayTimerRegister.set(0);
+            }
 
-            IntStream.range(0, this.displayBuffer.get()[0].length).forEach(y -> {
-                IntStream.range(0, this.displayBuffer.get().length).forEach(x ->
-                        System.out.print(String.valueOf(this.displayBuffer.get()[x][y]).replace("0", " ")));
-                System.out.println();
-            });
-
-//            Arrays.stream(this.displayBuffer.get()).forEach(integers -> System.out.println(Arrays.toString(integers)));
-            System.out.println();
-            System.out.println();
-            Thread.sleep(16);
+            //Thread.sleep(16);
         }
     }
 

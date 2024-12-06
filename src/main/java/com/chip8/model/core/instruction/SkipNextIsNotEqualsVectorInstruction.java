@@ -30,7 +30,7 @@ public class SkipNextIsNotEqualsVectorInstruction extends InstructionAbstract {
         final Integer vy = HexFormat.fromHexDigits(data.substring(2, 3));
 
         if (!Objects.equals(this.vRegister.get(vx), this.vRegister.get(vy))) {
-            this.pc.next(4);
+            this.pc.next(2);
         }
     }
 }
