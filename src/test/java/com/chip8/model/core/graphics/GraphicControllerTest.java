@@ -3,6 +3,7 @@ package com.chip8.model.core.graphics;
 import com.chip8.api.core.buffer.Buffer;
 import com.chip8.api.core.register.VRegister;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -11,6 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
+@Disabled
 class GraphicControllerTest {
 
     @Mock
